@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "ci:test": "npm run lint && npm run test -- --coverage",
     "ci:e2e:ios": "detox build -c ios.sim.release && detox test -c ios.sim.release --cleanup",
     "ci:e2e:android": "detox build -c android.emu.release && detox test -c android.emu.release",
     "ci:e2e": "npm run ci:e2e:ios && npm run ci:e2e:android",
@@ -42,6 +43,13 @@
     "typescript": "^3.7.3"
   },
   "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+      }
+    },
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/e2e/"

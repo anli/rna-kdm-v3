@@ -1,19 +1,19 @@
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {HomeScreen} from '@screens';
+import {SurvivorsScreen} from '@screens';
 import React from 'react';
 import 'react-native-gesture-handler';
 import {Provider as PaperProvider} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createStackNavigator();
-const HomeTab = () => (
+const SurvivorsTab = () => (
   <Stack.Navigator>
     <Stack.Screen
       name="HomeScreen"
-      component={HomeScreen.Component}
-      options={HomeScreen.Options}
+      component={SurvivorsScreen.Component}
+      options={SurvivorsScreen.options}
     />
   </Stack.Navigator>
 );
@@ -22,16 +22,18 @@ const Tab = createMaterialBottomTabNavigator();
 const Tabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="HomeTab"
+      initialRouteName="SurvivorsTab"
       labeled={false}
       activeColor="#000"
       barStyle={WHITE_BACKGROUND_STYLE}>
       <Tab.Screen
         options={{
-          tabBarIcon: ({color}) => <Icon name="home" color={color} size={24} />,
+          tabBarIcon: ({color}) => (
+            <Icon name="human" color={color} size={24} />
+          ),
         }}
-        name="HomeTab"
-        component={HomeTab}
+        name="SurvivorsTab"
+        component={SurvivorsTab}
       />
     </Tab.Navigator>
   );

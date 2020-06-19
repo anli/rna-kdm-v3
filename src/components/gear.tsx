@@ -1,5 +1,6 @@
 import React from 'react';
 import {Card as NativeCard} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styled from 'styled-components/native';
 
 interface Props {
@@ -7,16 +8,34 @@ interface Props {
   title: string;
   onPress: any;
   testID: string;
+  selected?: boolean;
 }
-const Gear = ({width, title, onPress, testID}: Props) => (
+const Gear = ({width, title, onPress, testID, selected = false}: Props) => (
   <Card testID={testID} width={width} onPress={onPress}>
-    <Card.Title subtitle={title} />
+    <Card.Title
+      subtitle={title}
+      right={(props: any) =>
+        selected && (
+          <SelectedIcon
+            testID={`${testID}.Selected`}
+            {...props}
+            name="check-circle"
+            size={24}
+            color="#5807eb"
+          />
+        )
+      }
+    />
   </Card>
 );
+
+export default Gear;
 
 const Card = styled(NativeCard)`
   margin-top: 8px;
   width: ${props => props.width};
 `;
 
-export default Gear;
+const SelectedIcon = styled(Icon)`
+  margin-right: 8px;
+`;

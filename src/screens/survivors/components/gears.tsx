@@ -1,4 +1,5 @@
 import {Gear} from '@components';
+import R from 'ramda';
 import React from 'react';
 import styled from 'styled-components/native';
 
@@ -10,20 +11,25 @@ interface Item {
 interface Props {
   data: (Item | undefined)[];
   onPress: (index: number, item: Item | undefined) => any;
+  selectedIndex?: number;
 }
 
-const Gears = ({data, onPress}: Props) => {
+const Gears = ({data, onPress, selectedIndex}: Props) => {
   return (
     <Wrapper>
-      {data?.map((item, index) => (
-        <Gear
-          testID={`Gear${index}`}
-          width="30%"
-          key={index}
-          title={item?.name || 'None'}
-          onPress={() => onPress(index, item)}
-        />
-      ))}
+      {data?.map((item, index) => {
+        const isSelected = !R.isNil(selectedIndex) && index === selectedIndex;
+        return (
+          <Gear
+            selected={isSelected}
+            testID={`Gear${index}`}
+            width="30%"
+            key={index}
+            title={item?.name || 'None'}
+            onPress={() => onPress(index, item)}
+          />
+        );
+      })}
     </Wrapper>
   );
 };

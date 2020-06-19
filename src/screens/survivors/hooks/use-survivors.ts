@@ -22,6 +22,7 @@ const useSurvivor = () => {
   const data = {
     gears: SurvivorSelectors.getGears(state),
     preview,
+    gearSelectedIndex,
   };
 
   const gearAdd = () => {

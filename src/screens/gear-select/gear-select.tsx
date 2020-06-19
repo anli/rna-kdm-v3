@@ -14,15 +14,19 @@ const Component = () => {
         <SectionGrid<any>
           itemDimension={130}
           sections={data?.gears}
-          renderItem={({item}) => (
-            <Gear
-              testID={`Gear${item.id}`}
-              width="100%"
-              key={item.id}
-              title={item.name}
-              onPress={() => actions.select(item)}
-            />
-          )}
+          renderItem={({item}) => {
+            const isSelected = data.selected && data.selected.id === item.id;
+            return (
+              <Gear
+                selected={isSelected}
+                testID={`Gear.${item.id}`}
+                width="100%"
+                key={item.id}
+                title={item.name}
+                onPress={() => actions.select(item)}
+              />
+            );
+          }}
           renderSectionHeader={({section}) => (
             <List.Subheader>{section.title}</List.Subheader>
           )}

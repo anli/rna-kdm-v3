@@ -30,7 +30,11 @@ const Component = () => {
             </>
           )}
         />
-        <Gears data={data.gears} onPress={actions.gearSelect} />
+        <Gears
+          data={data.gears}
+          onPress={actions.gearSelect}
+          selectedIndex={data.gearSelectedIndex}
+        />
       </List.Section>
     </Screen>
   );

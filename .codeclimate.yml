@@ -4,6 +4,7 @@ exclude_patterns:
   - 'ios/'
   - 'coverage/'
   - 'e2e/'
+  - '**/*.test.tsx'
 checks:
   method-lines:
     config:

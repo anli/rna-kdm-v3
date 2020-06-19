@@ -51,7 +51,10 @@ defineFeature(feature, test => {
       if (button === 'CONFIRM') {
         act(() => {
           store.dispatch(
-            survivorSlice.actions.setGear({item: {name: 'Cloth'}, index: 0}),
+            survivorSlice.actions.setGear({
+              item: {name: 'Cloth', imageUrl: 'clothImageUrl'},
+              index: 0,
+            }),
           );
         });
         return;

@@ -1,4 +1,4 @@
-import {Screen} from '@components';
+import {Preview, Screen} from '@components';
 import React from 'react';
 import {IconButton, List} from 'react-native-paper';
 import {Gears} from './components';
@@ -9,6 +9,7 @@ const Component = () => {
 
   return (
     <Screen testID="SurvivorsScreen">
+      <Preview testID="Preview" uri={data.preview?.imageUrl} />
       <List.Section>
         <List.Item
           title="Gear Grid"

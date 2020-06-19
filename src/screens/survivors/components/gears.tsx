@@ -4,11 +4,12 @@ import styled from 'styled-components/native';
 
 interface Item {
   name: string;
+  imageUrl: string;
 }
 
 interface Props {
   data: (Item | undefined)[];
-  onPress: (index: number) => any;
+  onPress: (index: number, item: Item | undefined) => any;
 }
 
 const Gears = ({data, onPress}: Props) => {
@@ -16,10 +17,11 @@ const Gears = ({data, onPress}: Props) => {
     <Wrapper>
       {data?.map((item, index) => (
         <Gear
+          testID={`Gear${index}`}
           width="30%"
           key={index}
           title={item?.name || 'None'}
-          onPress={() => onPress(index)}
+          onPress={() => onPress(index, item)}
         />
       ))}
     </Wrapper>

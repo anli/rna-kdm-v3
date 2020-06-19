@@ -23,7 +23,7 @@ defineFeature(feature, test => {
         reducer: {
           survivor: getSurvivorSlice({
             gears: [
-              {name: 'Cloth'},
+              {name: 'Cloth', imageUrl: 'clothImageUrl'},
               undefined,
               undefined,
               undefined,

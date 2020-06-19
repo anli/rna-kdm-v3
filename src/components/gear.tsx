@@ -6,9 +6,10 @@ interface Props {
   width: string;
   title: string;
   onPress: any;
+  testID: string;
 }
-const Gear = ({width, title, onPress}: Props) => (
-  <Card width={width} onPress={onPress}>
+const Gear = ({width, title, onPress, testID}: Props) => (
+  <Card testID={testID} width={width} onPress={onPress}>
     <Card.Title subtitle={title} />
   </Card>
 );

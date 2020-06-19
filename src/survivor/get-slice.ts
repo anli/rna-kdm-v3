@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 export interface Gear {
   name: string;
+  imageUrl: string;
 }
 
 export interface SurvivorState {

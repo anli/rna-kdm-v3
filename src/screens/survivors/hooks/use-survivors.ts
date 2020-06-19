@@ -5,7 +5,13 @@ import R from 'ramda';
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
+interface Gear {
+  name: string;
+  imageUrl: string;
+}
+
 const useSurvivor = () => {
+  const [preview, setPreview] = useState<undefined | Gear>(undefined);
   const [gearSelectedIndex, setGearSelectedIndex] = useState<
     undefined | number
   >(undefined);
@@ -15,6 +21,7 @@ const useSurvivor = () => {
 
   const data = {
     gears: SurvivorSelectors.getGears(state),
+    preview,
   };
 
   const gearAdd = () => {
@@ -24,7 +31,10 @@ const useSurvivor = () => {
     }
   };
 
-  const gearSelect = (index: number) => setGearSelectedIndex(index);
+  const gearSelect = (index: number, item: undefined | Gear) => {
+    setGearSelectedIndex(index);
+    setPreview(item);
+  };
 
   const gearRemove = () => {
     if (!R.isNil(gearSelectedIndex)) {

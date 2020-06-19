@@ -1,3 +1,5 @@
+import {configureStore} from '@reduxjs/toolkit';
+import {survivorSlice} from '@survivor';
 import {render} from '@test';
 import {defineFeature, loadFeature} from 'jest-cucumber';
 import React from 'react';
@@ -18,7 +20,10 @@ defineFeature(feature, test => {
     given('data of "Gear Grid" is "Undefined"', async () => {});
 
     when('I am at "Survivors Screen"', async () => {
-      component = render(<SurvivorsScreen.Component />);
+      const store = configureStore({
+        reducer: {survivor: survivorSlice.reducer},
+      });
+      component = render(<SurvivorsScreen.Component />, store);
     });
 
     then('I should see "Gear Grid"', async () => {

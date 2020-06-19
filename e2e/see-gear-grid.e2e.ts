@@ -25,14 +25,6 @@ defineFeature(feature, test => {
 
     then('I should see "None"', async () => {
       await expect(element(by.text('None')).atIndex(0)).toBeVisible();
-      await expect(element(by.text('None')).atIndex(1)).toBeVisible();
-      await expect(element(by.text('None')).atIndex(2)).toBeVisible();
-      await expect(element(by.text('None')).atIndex(3)).toBeVisible();
-      await expect(element(by.text('None')).atIndex(4)).toBeVisible();
-      await expect(element(by.text('None')).atIndex(5)).toBeVisible();
-      await expect(element(by.text('None')).atIndex(6)).toBeVisible();
-      await expect(element(by.text('None')).atIndex(7)).toBeVisible();
-      await expect(element(by.text('None')).atIndex(8)).toBeVisible();
     });
   });
 });

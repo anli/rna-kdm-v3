@@ -3,3 +3,8 @@ exclude_patterns:
   - 'android/'
   - 'ios/'
   - 'coverage/'
+  - 'e2e/'
+checks:
+  method-lines:
+    config:
+      threshold: 50

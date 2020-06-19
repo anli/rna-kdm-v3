@@ -5,9 +5,10 @@ import styled from 'styled-components/native';
 interface Props {
   width: string;
   title: string;
+  onPress: any;
 }
-const Gear = ({width, title}: Props) => (
-  <Card width={width}>
+const Gear = ({width, title, onPress}: Props) => (
+  <Card width={width} onPress={onPress}>
     <Card.Title subtitle={title} />
   </Card>
 );

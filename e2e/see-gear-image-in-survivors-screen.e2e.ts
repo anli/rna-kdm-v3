@@ -15,11 +15,13 @@ defineFeature(feature, test => {
 
     given(/^data of "First Gear" is "(.*)"$/, async (item: string) => {
       if (item === 'Cloth') {
-        await expect(element(by.id('SurvivorsScreen'))).toBeVisible();
-        await element(by.text('None'))
+        await expect(element(by.id('survivor1Screen'))).toBeVisible();
+        await element(by.text('None').withAncestor(by.id('survivor1Screen')))
           .atIndex(0)
           .tap();
-        await element(by.id('GearAddButton')).tap();
+        await element(
+          by.id('GearAddButton').withAncestor(by.id('survivor1Screen')),
+        ).tap();
         await expect(element(by.id('GearSelectScreen'))).toBeVisible();
         await element(by.text('Cloth')).tap();
         await element(by.text('CONFIRM')).tap();
@@ -30,15 +32,19 @@ defineFeature(feature, test => {
     });
 
     given('I am at "Survivors Screen"', async () => {
-      await expect(element(by.id('SurvivorsScreen'))).toBeVisible();
+      await expect(element(by.id('survivor1Screen'))).toBeVisible();
     });
 
     when('I press "First Gear"', async () => {
-      await element(by.id('Gear0')).tap();
+      await element(
+        by.id('Gear0').withAncestor(by.id('survivor1Screen')),
+      ).tap();
     });
 
     then(/^I should see "Preview" is "(.*)"$/, async () => {
-      await expect(element(by.id('Preview'))).toBeVisible();
+      await expect(
+        element(by.id('Preview').withAncestor(by.id('survivor1Screen'))),
+      ).toBeVisible();
     });
   });
 });

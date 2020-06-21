@@ -1,5 +1,6 @@
+import {mockUseRoute} from '@mocks';
 import {configureStore} from '@reduxjs/toolkit';
-import {survivorSlice} from '@survivor';
+import {survivorSlices} from '@survivor';
 import {render} from '@test';
 import {defineFeature, loadFeature} from 'jest-cucumber';
 import React from 'react';
@@ -12,7 +13,9 @@ const feature = loadFeature('./e2e/see-gear-select-indicator.feature');
 defineFeature(feature, test => {
   let component: RenderAPI;
 
-  beforeEach(() => {});
+  beforeEach(() => {
+    mockUseRoute.mockReset();
+  });
 
   test('see gear select indicator at survivors screen', ({
     given,
@@ -22,8 +25,9 @@ defineFeature(feature, test => {
     given('I am any', async () => {});
 
     given('I am at "Survivors Screen"', async () => {
+      mockUseRoute.mockReturnValue({params: {slice: 'survivor1'}});
       const store = configureStore({
-        reducer: {survivor: survivorSlice.reducer},
+        reducer: {survivor1: survivorSlices.survivor1.reducer},
       });
       component = render(<SurvivorsScreen.Component />, store);
     });

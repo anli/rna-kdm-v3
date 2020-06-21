@@ -1,6 +1,6 @@
 import {mockGoBack, mockUseRoute} from '@mocks';
 import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
-import {survivorSlice} from '@survivor';
+import {survivorSlices} from '@survivor';
 import {render} from '@test';
 import {defineFeature, loadFeature} from 'jest-cucumber';
 import React from 'react';
@@ -37,9 +37,9 @@ defineFeature(feature, test => {
     given('I press "Add Gear"', async () => {});
 
     given('I am at "Gear Select Screen"', async () => {
-      mockUseRoute.mockReturnValue({params: {index: 0}});
+      mockUseRoute.mockReturnValue({params: {index: 0, slice: 'survivor1'}});
       store = configureStore({
-        reducer: {survivor: survivorSlice.reducer},
+        reducer: {survivor1: survivorSlices.survivor1.reducer},
       });
       component = render(<GearSelectScreen.Component />, store);
     });
@@ -72,7 +72,7 @@ defineFeature(feature, test => {
             typeId: 'gear',
           },
         },
-        type: 'Survivor/setGear',
+        type: 'survivor1/setGear',
       });
       expect(mockDispatch).toBeCalledTimes(1);
     });

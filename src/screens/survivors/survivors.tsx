@@ -8,10 +8,11 @@ const Component = () => {
   const {data, actions} = useSurvivors();
 
   return (
-    <Screen testID="SurvivorsScreen">
+    <Screen testID={`${data.slice}Screen`}>
       <Preview testID="Preview" uri={data.preview?.imageUrl} />
       <List.Section>
         <List.Item
+          testID={`${data.slice}GearGrid`}
           title="Gear Grid"
           right={props => (
             <>

@@ -1,5 +1,4 @@
 import {createSelector} from '@reduxjs/toolkit';
-import {SurvivorState} from './get-slice';
 
 const LOCATIONS = [
   {
@@ -822,8 +821,8 @@ const LOCATIONS = [
   },
 ];
 
-const getGears = createSelector<{survivor: SurvivorState}, any, any>(
-  state => state.survivor,
+const getGears = createSelector<any, any, any>(
+  state => state,
   survivor => survivor?.gears,
 );
 

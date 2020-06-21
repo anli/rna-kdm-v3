@@ -1,3 +1,4 @@
+import {mockUseRoute} from '@mocks';
 import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
 import {getSurvivorSlice} from '@survivor';
 import {render} from '@test';
@@ -13,27 +14,33 @@ defineFeature(feature, test => {
   let component: RenderAPI;
   let store: EnhancedStore<any>;
 
-  beforeEach(() => {});
+  beforeEach(() => {
+    mockUseRoute.mockReset();
+  });
 
   test('remove gear from gear grid', ({given, when, then}) => {
     given('I am any', async () => {});
 
     given('data of "First Gear" is "Cloth"', async () => {
+      mockUseRoute.mockReturnValue({params: {slice: 'survivor1'}});
       store = configureStore({
         reducer: {
-          survivor: getSurvivorSlice({
-            gears: [
-              {name: 'Cloth', imageUrl: 'clothImageUrl'},
-              undefined,
-              undefined,
-              undefined,
-              undefined,
-              undefined,
-              undefined,
-              undefined,
-              undefined,
-            ],
-          }).reducer,
+          survivor1: getSurvivorSlice(
+            {
+              gears: [
+                {name: 'Cloth', imageUrl: 'clothImageUrl'},
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+              ],
+            },
+            'survivor1',
+          ).reducer,
         },
       });
       component = render(<SurvivorsScreen.Component />, store);

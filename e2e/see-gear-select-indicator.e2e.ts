@@ -18,16 +18,18 @@ defineFeature(feature, test => {
     given('I am any', async () => {});
 
     given('I am at "Survivors Screen"', async () => {
-      await expect(element(by.id('SurvivorsScreen'))).toBeVisible();
+      await expect(element(by.id('survivor1Screen'))).toBeVisible();
     });
 
     when('I press "first item"', async () => {
-      await element(by.id('Gear0')).tap();
+      await element(
+        by.id('Gear0').withAncestor(by.id('survivor1Screen')),
+      ).tap();
     });
 
     then('I should see "first Item Selected Indicator"', async () => {
       await expect(
-        element(by.id('Gear0.Selected').withAncestor(by.id('Gear0'))),
+        element(by.id('Gear0.Selected').withAncestor(by.id('survivor1Screen'))),
       ).toBeVisible();
     });
   });
@@ -40,11 +42,13 @@ defineFeature(feature, test => {
     given('I am any', async () => {});
 
     given('I am at "Gear Select Screen"', async () => {
-      await expect(element(by.id('SurvivorsScreen'))).toBeVisible();
-      await element(by.text('None'))
+      await expect(element(by.id('survivor1Screen'))).toBeVisible();
+      await element(by.text('None').withAncestor(by.id('survivor1Screen')))
         .atIndex(0)
         .tap();
-      await element(by.id('GearAddButton')).tap();
+      await element(
+        by.id('GearAddButton').withAncestor(by.id('survivor1Screen')),
+      ).tap();
       await expect(element(by.id('GearSelectScreen'))).toBeVisible();
     });
 

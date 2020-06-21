@@ -1,9 +1,11 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {RootState} from '@store';
-import {SurvivorSelectors, survivorSlice} from '@survivor';
+import {SurvivorSelectors, survivorSlices} from '@survivor';
 import R from 'ramda';
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+
+type SliceProps = 'survivor1' | 'survivor2' | 'survivor3' | 'survivor4';
 
 interface Gear {
   name: string;
@@ -18,16 +20,19 @@ const useSurvivor = () => {
   const state = useSelector<RootState, RootState>(res => res);
   const {navigate} = useNavigation();
   const dispatch = useDispatch();
+  const {params} = useRoute<any>();
+  const slice: SliceProps = params.slice;
 
   const data = {
-    gears: SurvivorSelectors.getGears(state),
+    gears: SurvivorSelectors.getGears(state[slice]),
     preview,
     gearSelectedIndex,
+    slice,
   };
 
   const gearAdd = () => {
     if (!R.isNil(gearSelectedIndex)) {
-      navigate('GearSelectScreen', {index: gearSelectedIndex});
+      navigate('GearSelectScreen', {index: gearSelectedIndex, slice});
       setGearSelectedIndex(undefined);
     }
   };
@@ -40,7 +45,7 @@ const useSurvivor = () => {
   const gearRemove = () => {
     if (!R.isNil(gearSelectedIndex)) {
       dispatch(
-        survivorSlice.actions.setGear({
+        survivorSlices[slice].actions.setGear({
           item: undefined,
           index: gearSelectedIndex,
         }),

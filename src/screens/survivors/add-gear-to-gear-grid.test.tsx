@@ -1,6 +1,6 @@
-import {mockNavigate} from '@mocks';
+import {mockNavigate, mockUseRoute} from '@mocks';
 import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
-import {survivorSlice} from '@survivor';
+import {survivorSlices} from '@survivor';
 import {render} from '@test';
 import {defineFeature, loadFeature} from 'jest-cucumber';
 import React from 'react';
@@ -15,6 +15,7 @@ defineFeature(feature, test => {
 
   beforeEach(() => {
     mockNavigate.mockReset();
+    mockUseRoute.mockReset();
   });
 
   test('default', ({given, when, then}) => {
@@ -25,8 +26,9 @@ defineFeature(feature, test => {
     given('data of "First Item" is "None"', async () => {});
 
     given('I am at "Survivors Screen"', async () => {
+      mockUseRoute.mockReturnValue({params: {slice: 'survivor1'}});
       store = configureStore({
-        reducer: {survivor: survivorSlice.reducer},
+        reducer: {survivor1: survivorSlices.survivor1.reducer},
       });
       component = render(<SurvivorsScreen.Component />, store);
 
@@ -42,7 +44,10 @@ defineFeature(feature, test => {
     });
 
     given('I am at "Gear Select Screen"', async () => {
-      expect(mockNavigate).toBeCalledWith('GearSelectScreen', {index: 0});
+      expect(mockNavigate).toBeCalledWith('GearSelectScreen', {
+        index: 0,
+        slice: 'survivor1',
+      });
     });
 
     given('I press "Cloth"', async () => {});
@@ -51,7 +56,7 @@ defineFeature(feature, test => {
       if (button === 'CONFIRM') {
         act(() => {
           store.dispatch(
-            survivorSlice.actions.setGear({
+            survivorSlices.survivor1.actions.setGear({
               item: {name: 'Cloth', imageUrl: 'clothImageUrl'},
               index: 0,
             }),

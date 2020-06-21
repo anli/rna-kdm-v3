@@ -1,5 +1,6 @@
+import {mockUseRoute} from '@mocks';
 import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
-import {getSurvivorSlice, survivorSlice} from '@survivor';
+import {getSurvivorSlice, survivorSlices} from '@survivor';
 import {render} from '@test';
 import {defineFeature, loadFeature} from 'jest-cucumber';
 import React from 'react';
@@ -13,7 +14,9 @@ defineFeature(feature, test => {
   let component: RenderAPI;
   let store: EnhancedStore<any>;
 
-  beforeEach(() => {});
+  beforeEach(() => {
+    mockUseRoute.mockReset();
+  });
 
   test('see gear image in survivors screen', ({given, when, then}) => {
     given('I am any', async () => {});
@@ -22,31 +25,35 @@ defineFeature(feature, test => {
       if (item === 'Cloth') {
         store = configureStore({
           reducer: {
-            survivor: getSurvivorSlice({
-              gears: [
-                {name: 'Cloth', imageUrl: 'clothImageUrl'},
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-                undefined,
-              ],
-            }).reducer,
+            survivor1: getSurvivorSlice(
+              {
+                gears: [
+                  {name: 'Cloth', imageUrl: 'clothImageUrl'},
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                ],
+              },
+              'survivor1',
+            ).reducer,
           },
         });
         return;
       }
 
       store = configureStore({
-        reducer: {survivor: survivorSlice.reducer},
+        reducer: {survivor1: survivorSlices.survivor1.reducer},
       });
       return;
     });
 
     given('I am at "Survivors Screen"', async () => {
+      mockUseRoute.mockReturnValue({params: {slice: 'survivor1'}});
       component = render(<SurvivorsScreen.Component />, store);
     });
 

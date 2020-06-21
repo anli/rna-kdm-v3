@@ -14,11 +14,13 @@ defineFeature(feature, test => {
     given('I am any', async () => {});
 
     given('I am at "Gear Select Screen"', async () => {
-      await expect(element(by.id('SurvivorsScreen'))).toBeVisible();
-      await element(by.text('None'))
+      await expect(element(by.id('survivor1Screen'))).toBeVisible();
+      await element(by.text('None').withAncestor(by.id('survivor1Screen')))
         .atIndex(0)
         .tap();
-      await element(by.id('GearAddButton')).tap();
+      await element(
+        by.id('GearAddButton').withAncestor(by.id('survivor1Screen')),
+      ).tap();
       await expect(element(by.id('GearSelectScreen'))).toBeVisible();
     });
 

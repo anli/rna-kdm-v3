@@ -1,12 +1,15 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {SurvivorSelectors, survivorSlice} from '@survivor';
+import {SurvivorSelectors, survivorSlices} from '@survivor';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
+
+type SliceProps = 'survivor1' | 'survivor2' | 'survivor3' | 'survivor4';
 
 const useGearSelect = () => {
   const {canGoBack, goBack} = useNavigation();
   const [selected, setSelected] = useState<any>();
   const {params} = useRoute<any>();
+  const slice: SliceProps = params.slice;
   const dispatch = useDispatch();
 
   const data = {
@@ -20,7 +23,10 @@ const useGearSelect = () => {
 
   const confirm = () => {
     dispatch(
-      survivorSlice.actions.setGear({index: params.index, item: selected}),
+      survivorSlices[slice].actions.setGear({
+        index: params.index,
+        item: selected,
+      }),
     );
     canGoBack() && goBack();
   };

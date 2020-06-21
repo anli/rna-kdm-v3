@@ -9,9 +9,9 @@ export interface SurvivorState {
   gears?: (Gear | undefined)[];
 }
 
-const getSurvivorSlice = (initialState: SurvivorState) =>
+const getSurvivorSlice = (initialState: SurvivorState, name: string) =>
   createSlice({
-    name: 'Survivor',
+    name,
     initialState,
     reducers: {
       setGear: (

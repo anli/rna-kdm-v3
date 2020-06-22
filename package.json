@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "ci:android": "fastlane android build",
     "ci:test": "npm run lint && npm run test -- --coverage",
     "ci:e2e:ios": "detox build -c ios.sim.release && detox test -c ios.sim.release --cleanup",
     "ci:e2e:android": "detox build -c android.emu.release && detox test -c android.emu.release",
@@ -16,6 +17,11 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "git secret hide -m && git add '*.secret' && git add .gitsecret/paths/mapping.cfg"
+    }
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
@@ -60,6 +66,7 @@
     "detox": "^16.8.2",
     "eslint": "^6.5.1",
     "eslint-plugin-detox": "^1.0.0",
+    "husky": "^4.2.5",
     "jest": "^24.9.0",
     "jest-circus": "^26.0.1",
     "jest-cucumber": "^2.0.11",

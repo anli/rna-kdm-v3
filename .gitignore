@@ -64,3 +64,10 @@ buck-out/
 /ios/Pods/
 coverage
 tmp
+
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+*/.env
+.gitsecret/keys/random_seed
+!*.secret

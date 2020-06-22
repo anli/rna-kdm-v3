@@ -1,8 +1,9 @@
 {
   "name": "rna-kdm",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
+    "changelog": "standard-changelog",
     "ci:android": "fastlane android build",
     "ci:test": "npm run lint && npm run test -- --coverage",
     "ci:e2e:ios": "detox build -c ios.sim.release && detox test -c ios.sim.release --cleanup",
@@ -74,6 +75,7 @@
     "prettier": "^1.19.1",
     "react-native-testing-library": "^2.1.0",
     "react-test-renderer": "16.9.0",
+    "standard-changelog": "^2.0.24",
     "typescript": "^3.7.3"
   },
   "jest": {

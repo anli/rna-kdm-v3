@@ -5,7 +5,7 @@ import {combineEpics, createEpicMiddleware} from 'redux-observable';
 const epicMiddleware = createEpicMiddleware();
 const epics: any[] = [...survivorEpic];
 
-const rootEpic = (action$: any) => combineEpics(...epics)(action$).pipe();
+// const rootEpic = (action$: any) => combineEpics(...epics)(action$).pipe();
 
 const getStore = () => {
   const store = configureStore({
@@ -18,7 +18,7 @@ const getStore = () => {
     middleware: [...getDefaultMiddleware(), epicMiddleware],
   });
 
-  epicMiddleware.run(rootEpic);
+  epicMiddleware.run(combineEpics(...epics));
   return store;
 };
 

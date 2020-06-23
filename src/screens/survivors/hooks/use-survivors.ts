@@ -2,7 +2,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {RootState} from '@store';
 import {SurvivorSelectors, survivorSlices} from '@survivor';
 import R from 'ramda';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 type SliceProps = 'survivor1' | 'survivor2' | 'survivor3' | 'survivor4';
@@ -22,6 +22,10 @@ const useSurvivor = () => {
   const dispatch = useDispatch();
   const {params} = useRoute<any>();
   const slice: SliceProps = params.slice;
+
+  useEffect(() => {
+    dispatch(survivorSlices[slice].actions.load());
+  }, [dispatch, slice]);
 
   const data = {
     gears: SurvivorSelectors.getGears(state[slice]),
@@ -54,10 +58,16 @@ const useSurvivor = () => {
     }
   };
 
+  /* istanbul ignore next */
+  const gearReset = () => {
+    dispatch(survivorSlices[slice].actions.gearReset());
+  };
+
   const actions = {
     gearSelect,
     gearAdd,
     gearRemove,
+    gearReset,
   };
 
   return {data, actions};

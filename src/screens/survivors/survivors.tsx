@@ -17,6 +17,12 @@ const Component = () => {
           right={props => (
             <>
               <IconButton
+                testID="GearResetButton"
+                {...props}
+                icon="sync"
+                onPress={actions.gearReset}
+              />
+              <IconButton
                 testID="GearRemoveButton"
                 {...props}
                 icon="delete"

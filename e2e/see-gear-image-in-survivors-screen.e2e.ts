@@ -11,7 +11,16 @@ defineFeature(feature, test => {
   });
 
   test('see gear image in survivors screen', ({given, when, then}) => {
-    given('I am any', async () => {});
+    given('I am any', async () => {
+      await element(
+        by.id('GearResetButton').withAncestor(by.id('survivor1Screen')),
+      ).tap();
+      await expect(
+        element(by.text('None').withAncestor(by.id('survivor1Screen'))).atIndex(
+          0,
+        ),
+      ).toBeVisible();
+    });
 
     given(/^data of "First Gear" is "(.*)"$/, async (item: string) => {
       if (item === 'Cloth') {

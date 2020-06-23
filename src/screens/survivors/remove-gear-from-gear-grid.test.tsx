@@ -1,11 +1,11 @@
 import {mockUseRoute} from '@mocks';
 import {configureStore, EnhancedStore} from '@reduxjs/toolkit';
-import {getSurvivorSlice} from '@survivor';
+import {getSurvivorSlice, survivorSlices} from '@survivor';
 import {render} from '@test';
 import {defineFeature, loadFeature} from 'jest-cucumber';
 import React from 'react';
 import 'react-native';
-import {fireEvent, RenderAPI} from 'react-native-testing-library';
+import {act, fireEvent, RenderAPI} from 'react-native-testing-library';
 import SurvivorsScreen from './survivors';
 
 const feature = loadFeature('./e2e/remove-gear-from-gear-grid.feature');
@@ -56,6 +56,13 @@ defineFeature(feature, test => {
 
     when('I press "Remove Gear"', async () => {
       fireEvent.press(component.getByTestId('GearRemoveButton'));
+      act(() => {
+        store.dispatch(
+          survivorSlices.survivor1.actions.loadSuccess({
+            gears: [null, null, null, null, null, null, null, null, null],
+          }),
+        );
+      });
     });
 
     then('I should see "First Item" is "None"', async () => {

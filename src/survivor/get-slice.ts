@@ -9,17 +9,22 @@ export interface SurvivorState {
   gears?: (Gear | undefined)[];
 }
 
+/* istanbul ignore next */
 const getSurvivorSlice = (initialState: SurvivorState, name: string) =>
   createSlice({
     name,
     initialState,
     reducers: {
-      setGear: (
-        state: SurvivorState,
-        action: PayloadAction<{index: number; item: Gear | undefined}>,
-      ) => {
-        state.gears?.splice(action.payload.index, 1, action.payload.item);
+      setGear: (_: SurvivorState, __: PayloadAction<any>) => {},
+      setGearSuccess: () => {},
+      load: () => {},
+      loadSuccess: (_: SurvivorState, action: PayloadAction<any>) => {
+        if (action.payload) {
+          return action.payload;
+        }
       },
+      gearReset: () => {},
+      gearResetSuccess: () => {},
     },
   });
 

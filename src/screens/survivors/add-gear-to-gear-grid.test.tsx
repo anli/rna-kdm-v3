@@ -56,9 +56,18 @@ defineFeature(feature, test => {
       if (button === 'CONFIRM') {
         act(() => {
           store.dispatch(
-            survivorSlices.survivor1.actions.setGear({
-              item: {name: 'Cloth', imageUrl: 'clothImageUrl'},
-              index: 0,
+            survivorSlices.survivor1.actions.loadSuccess({
+              gears: [
+                {name: 'Cloth', imageUrl: 'clothImageUrl'},
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+              ],
             }),
           );
         });

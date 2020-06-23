@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "261596551859",
+    "firebase_url": "https://rna-kdm.firebaseio.com",
+    "project_id": "rna-kdm",
+    "storage_bucket": "rna-kdm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261596551859:android:7bbe60e88ab069d6dc6ec6",
+        "android_client_info": {
+          "package_name": "io.anli.kdm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261596551859-kdkv5jfg9jegt8c59q2s3bt819tug30m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZzdxAFTWgSYt-I5_IvSx1v4FaOO4zHP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261596551859-kdkv5jfg9jegt8c59q2s3bt819tug30m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -72,3 +72,4 @@ fastlane/screenshots
 .gitsecret/keys/random_seed
 !*.secret
 android/app/google-services.json
+certs/playstore.json

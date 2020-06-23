@@ -8,6 +8,12 @@ platform :android do
     Dotenv.overload '../env/.env'
 
     file = getFolderPath().concat(ENV['ANDROID_STORE_FILE'])
+    version = load_json(json_path: "package.json")["version"]
+
+    android_set_version_name(
+      version_name: version,
+      gradle_file: "./android/app/build.gradle"
+    )
 
     android_set_version_code(
       version_code: number_of_commits(),
@@ -23,12 +29,13 @@ platform :android do
         "android.injected.signing.store.password" => ENV['ANDROID_STORE_PASSWORD'],
         "android.injected.signing.key.alias" => ENV['ANDROID_KEY_ALIAS'],
         "android.injected.signing.key.password" => ENV['ANDROID_KEY_PASSWORD'],
-        "versionName" => load_json(json_path: "package.json")["version"],
+        "versionName" => version,
       },
-      print_command_output: false,
+      print_command_output: true,
       print_command: true
     )
 
+    puts "AAB: #{lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]}"
     puts "AAB: #{lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH]}"
   end
 

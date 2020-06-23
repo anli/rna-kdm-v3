@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/anli/rna-kdm/compare/1.0.0...1.1.0) (2020-06-23)
+
+
+### Features
+
+* **app:** add firebase and epic ([#9](https://github.com/anli/rna-kdm/issues/9)) ([f6d9cd7](https://github.com/anli/rna-kdm/commit/f6d9cd7f0a4f7d85b0137d93fc9acef8078a63ff))
+
+
+
 # 1.0.0 (2020-06-22)
 
 

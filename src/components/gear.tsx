@@ -5,15 +5,24 @@ import styled from 'styled-components/native';
 
 interface Props {
   width: string;
-  title: string;
+  title?: string;
   onPress: any;
   testID: string;
   selected?: boolean;
+  subtitle?: string;
 }
-const Gear = ({width, title, onPress, testID, selected = false}: Props) => (
+const Gear = ({
+  width,
+  title,
+  subtitle,
+  onPress,
+  testID,
+  selected = false,
+}: Props) => (
   <Card testID={testID} width={width} onPress={onPress}>
     <Card.Title
-      subtitle={title}
+      title={title}
+      subtitle={subtitle}
       right={(props: any) =>
         selected && (
           <SelectedIcon

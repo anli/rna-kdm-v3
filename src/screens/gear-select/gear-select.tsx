@@ -22,7 +22,7 @@ const Component = () => {
                 testID={`Gear.${item.id}`}
                 width="100%"
                 key={item.id}
-                title={item.name}
+                subtitle={item.name}
                 onPress={() => actions.select(item)}
               />
             );

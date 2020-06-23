@@ -12,6 +12,7 @@ defineFeature(feature, test => {
 
   test('remove gear from gear grid', ({given, when, then}) => {
     given('I am any', async () => {
+      await element(by.id('SurvivorsBottomTab')).tap();
       await element(
         by.id('GearResetButton').withAncestor(by.id('survivor1Screen')),
       ).tap();

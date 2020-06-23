@@ -16,6 +16,7 @@ defineFeature(feature, test => {
     then,
   }) => {
     given('I am any', async () => {
+      await element(by.id('SurvivorsBottomTab')).tap();
       await element(
         by.id('GearResetButton').withAncestor(by.id('survivor1Screen')),
       ).tap();
@@ -51,6 +52,7 @@ defineFeature(feature, test => {
     given('I am any', async () => {});
 
     given('I am at "Gear Select Screen"', async () => {
+      await element(by.id('SurvivorsBottomTab')).tap();
       await expect(element(by.id('survivor1Screen'))).toBeVisible();
       await element(by.text('None').withAncestor(by.id('survivor1Screen')))
         .atIndex(0)

@@ -25,7 +25,7 @@ const Gears = ({data, onPress, selectedIndex}: Props) => {
             testID={`Gear${index}`}
             width="30%"
             key={index}
-            title={item?.name || 'None'}
+            subtitle={item?.name || 'None'}
             onPress={() => onPress(index, item)}
           />
         );

@@ -2,7 +2,7 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {GearSelectScreen, SurvivorsScreen} from '@screens';
+import {GearSelectScreen, SettlementScreen, SurvivorsScreen} from '@screens';
 import {store} from '@store';
 import React from 'react';
 import 'react-native-gesture-handler';
@@ -37,30 +37,50 @@ const TopTabs = () => {
   );
 };
 
-const Stack = createStackNavigator();
+const SurvivorsTabStack = createStackNavigator();
 const SurvivorsTab = () => (
-  <Stack.Navigator>
-    <Stack.Screen
+  <SurvivorsTabStack.Navigator>
+    <SurvivorsTabStack.Screen
       name="SurvivorsScreen"
       component={TopTabs}
       options={SurvivorsScreen.options}
     />
-  </Stack.Navigator>
+  </SurvivorsTabStack.Navigator>
+);
+const SettlementTabStack = createStackNavigator();
+const SettlementTab = () => (
+  <SettlementTabStack.Navigator>
+    <SettlementTabStack.Screen
+      name="SettlementScreen"
+      component={SettlementScreen.Component}
+      options={SurvivorsScreen.options}
+    />
+  </SettlementTabStack.Navigator>
 );
 const WHITE_BACKGROUND_STYLE = {backgroundColor: '#fff'};
 const Tab = createMaterialBottomTabNavigator();
+const getTabBarIcon = (icon: string) => ({color}: any) => (
+  <Icon name={icon} color={color} size={24} />
+);
 const Tabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="SurvivorsTab"
+      initialRouteName="SettlementTab"
       labeled={false}
       activeColor="#000"
       barStyle={WHITE_BACKGROUND_STYLE}>
       <Tab.Screen
         options={{
-          tabBarIcon: ({color}) => (
-            <Icon name="human" color={color} size={24} />
-          ),
+          tabBarIcon: getTabBarIcon('fireplace'),
+          tabBarTestID: 'SettlementBottomTab',
+        }}
+        name="SettlementTab"
+        component={SettlementTab}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: getTabBarIcon('human'),
+          tabBarTestID: 'SurvivorsBottomTab',
         }}
         name="SurvivorsTab"
         component={SurvivorsTab}

@@ -58,7 +58,6 @@ const useSurvivor = () => {
     }
   };
 
-  /* istanbul ignore next */
   const gearReset = () => {
     dispatch(survivorSlices[slice].actions.gearReset());
   };

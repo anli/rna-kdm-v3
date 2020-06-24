@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/anli/rna-kdm/compare/1.2.0...1.2.1) (2020-06-24)
+
+
+### Bug Fixes
+
+* **settlement:** change principle remove icon button ui ([21d3cdc](https://github.com/anli/rna-kdm/commit/21d3cdc048ca6a7ce56e856a4418c1de2b5572ee))
+
+
+
 # [1.2.0](https://github.com/anli/rna-kdm/compare/1.1.0...1.2.0) (2020-06-24)
 
 

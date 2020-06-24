@@ -11,7 +11,7 @@ const PRINCIPLES = {
     {
       id: 'survivalOfTheFittest',
       imageUrl: 'https://imgur.com/3J7hf4Q.png',
-      name: 'Survival Of The Fittest',
+      name: 'Survival of the Fittest',
     },
   ],
   death: [

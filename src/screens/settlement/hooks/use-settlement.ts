@@ -5,6 +5,9 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 const useSettlement = () => {
+  const [preview, setPreview] = useState<undefined | {imageUrl: string}>(
+    undefined,
+  );
   const [principleSelectedId, setPrincipleSelectedId] = useState<
     string | undefined
   >(undefined);
@@ -20,14 +23,19 @@ const useSettlement = () => {
   const props = {
     principles,
     principleSelectedId,
+    preview,
   };
 
-  const principleSelected = (id: string) => setPrincipleSelectedId(id);
+  const principleSelected = (id: string, item: any) => {
+    setPreview(item);
+    setPrincipleSelectedId(id);
+  };
 
   const principleSet = () => {
     if (principleSelectedId) {
       navigate('PrincipleSelectScreen', {id: principleSelectedId});
       setPrincipleSelectedId(undefined);
+      setPreview(undefined);
     }
   };
 

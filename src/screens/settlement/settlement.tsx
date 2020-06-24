@@ -1,4 +1,4 @@
-import {Gear, Screen} from '@components';
+import {Gear, Preview, Screen} from '@components';
 import React from 'react';
 import {IconButton, List} from 'react-native-paper';
 import styled from 'styled-components/native';
@@ -18,6 +18,7 @@ const Component = () => {
 
   return (
     <Screen testID="SettlementScreen">
+      <Preview height="240px" testID="Preview" uri={props.preview?.imageUrl} />
       <List.Section>
         <List.Item
           testID="Principles"
@@ -48,7 +49,12 @@ const Component = () => {
               width="45%"
               subtitle={props.principles[principle.key]?.name || 'None'}
               title={principle.label}
-              onPress={() => actions.principleSelected(principle.key)}
+              onPress={() =>
+                actions.principleSelected(
+                  principle.key,
+                  props.principles[principle.key],
+                )
+              }
             />
           ))}
         </Principles>

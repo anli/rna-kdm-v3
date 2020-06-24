@@ -1,4 +1,4 @@
-import {FooterButtons, Gear, Screen} from '@components';
+import {FooterButtons, Gear, Preview, Screen} from '@components';
 import React from 'react';
 import {FlatList} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
@@ -9,6 +9,7 @@ const Component = () => {
 
   return (
     <Screen testID="PrincipleSelectScreen">
+      <Preview height="240px" testID="Preview" uri={props.selected?.imageUrl} />
       <List>
         <FlatList
           data={props.data}

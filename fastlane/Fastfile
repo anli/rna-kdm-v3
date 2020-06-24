@@ -39,6 +39,16 @@ platform :android do
     puts "AAB: #{lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH]}"
   end
 
+  desc "Deploy a build"
+  lane :deploy do |options|
+
+    supply(
+      aab: 'android/app/build/outputs/bundle/release/app.aab',
+      track: 'internal',
+      json_key: 'certs/playstore.json'
+    )
+  end
+
 end
 
 lane :getFolderPath do

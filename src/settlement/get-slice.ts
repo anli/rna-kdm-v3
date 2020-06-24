@@ -20,7 +20,7 @@ const getSettlementSlice = (initialState: SettlementState) =>
     reducers: {
       setPrinciple: (
         _: SettlementState,
-        __: PayloadAction<{id: PrincipleId; item: PrincipleValue}>,
+        __: PayloadAction<{id: string; item?: PrincipleValue}>,
       ) => {},
       setPrincipleSuccess: () => {},
       load: () => {},

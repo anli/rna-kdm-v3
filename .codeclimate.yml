@@ -8,4 +8,4 @@ exclude_patterns:
 checks:
   method-lines:
     config:
-      threshold: 50
+      threshold: 100

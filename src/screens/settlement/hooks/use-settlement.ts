@@ -41,12 +41,28 @@ const useSettlement = () => {
 
   const principleReset = () => {
     dispatch(settlementSlice.actions.principleReset());
+    setPrincipleSelectedId(undefined);
+    setPreview(undefined);
+  };
+
+  const principleRemove = () => {
+    if (principleSelectedId) {
+      dispatch(
+        settlementSlice.actions.setPrinciple({
+          id: principleSelectedId,
+          item: undefined,
+        }),
+      );
+      setPrincipleSelectedId(undefined);
+      setPreview(undefined);
+    }
   };
 
   const actions = {
     principleSelected,
     principleSet,
     principleReset,
+    principleRemove,
   };
 
   return {props, actions};

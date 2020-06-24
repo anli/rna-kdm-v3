@@ -33,7 +33,7 @@ const Component = () => {
               />
               <IconButton
                 testID="PrincipleRemoveButton"
-                {...props}
+                {...itemProps}
                 icon="delete"
                 onPress={actions.principleRemove}
               />

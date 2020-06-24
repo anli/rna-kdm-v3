@@ -1,6 +1,6 @@
 import {Gear, Screen} from '@components';
 import React from 'react';
-import {List} from 'react-native-paper';
+import {IconButton, List} from 'react-native-paper';
 import styled from 'styled-components/native';
 import useSettlement from './hooks';
 
@@ -19,16 +19,35 @@ const Component = () => {
   return (
     <Screen testID="SettlementScreen">
       <List.Section>
-        <List.Item testID="Principles" title="Principles" />
+        <List.Item
+          testID="Principles"
+          title="Principles"
+          right={itemProps => (
+            <>
+              <IconButton
+                testID="PrincipleResetButton"
+                {...itemProps}
+                icon="sync"
+                onPress={actions.principleReset}
+              />
+              <IconButton
+                testID="PrincipleSetButton"
+                {...itemProps}
+                icon="plus"
+                onPress={actions.principleSet}
+              />
+            </>
+          )}
+        />
         <Principles>
           {PRINCIPLES.map(principle => (
             <Gear
               key={principle.key}
-              selected={false}
+              selected={principle.key === props.principleSelectedId}
               testID={`Principle.${principle.key}`}
               width="45%"
-              title={props[principle.key]}
-              subtitle={principle.label}
+              subtitle={props.principles[principle.key]?.name || 'None'}
+              title={principle.label}
               onPress={() => actions.principleSelected(principle.key)}
             />
           ))}

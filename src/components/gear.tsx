@@ -42,6 +42,7 @@ export default Gear;
 
 const Card = styled(NativeCard)`
   margin-top: 8px;
+  padding-right: 8px;
   width: ${props => props.width};
 `;
 

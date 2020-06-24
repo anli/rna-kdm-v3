@@ -1,6 +1,6 @@
-import {Gear, Preview, Screen} from '@components';
+import {FooterButtons, Gear, Preview, Screen} from '@components';
 import React from 'react';
-import {Button as NativeButton, List} from 'react-native-paper';
+import {List} from 'react-native-paper';
 import {SectionGrid} from 'react-native-super-grid';
 import styled from 'styled-components/native';
 import useGearSelect from './hooks';
@@ -32,14 +32,7 @@ const Component = () => {
           )}
         />
       </Section>
-      <Footer>
-        <Button mode="outlined" onPress={actions.cancel}>
-          CANCEL
-        </Button>
-        <Button mode="contained" onPress={actions.confirm}>
-          CONFIRM
-        </Button>
-      </Footer>
+      <FooterButtons confirm={actions.confirm} cancel={actions.cancel} />
     </Screen>
   );
 };
@@ -51,18 +44,6 @@ export default class {
   static options = options;
 }
 
-const Footer = styled.View`
-  background-color: white;
-  padding: 16px 8px 16px 8px;
-  flex-direction: row;
-`;
-
 const Section = styled(List.Section)`
   flex: 1;
-`;
-
-const Button = styled(NativeButton)`
-  flex: 1;
-  margin-right: 8px;
-  margin-left: 8px;
 `;

@@ -2,7 +2,12 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {GearSelectScreen, SettlementScreen, SurvivorsScreen} from '@screens';
+import {
+  GearSelectScreen,
+  PrincipleSelectScreen,
+  SettlementScreen,
+  SurvivorsScreen,
+} from '@screens';
 import {store} from '@store';
 import React from 'react';
 import 'react-native-gesture-handler';
@@ -106,6 +111,11 @@ const App = () => {
               name="GearSelectScreen"
               component={GearSelectScreen.Component}
               options={GearSelectScreen.options}
+            />
+            <RootStack.Screen
+              name="PrincipleSelectScreen"
+              component={PrincipleSelectScreen.Component}
+              options={PrincipleSelectScreen.options}
             />
           </RootStack.Navigator>
         </NavigationContainer>

@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {survivorSlices} from '@survivor';
+import {settlementSlice} from '@settlement';
 import {render} from '@test';
 import {defineFeature, loadFeature} from 'jest-cucumber';
 import React from 'react';
@@ -19,7 +19,7 @@ defineFeature(feature, test => {
 
     when('I am at "Settlement Screen"', async () => {
       const store = configureStore({
-        reducer: {survivor1: survivorSlices.survivor1.reducer},
+        reducer: {settlement: settlementSlice.reducer},
       });
       component = render(<SettlementScreen.Component />, store);
     });

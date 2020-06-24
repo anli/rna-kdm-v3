@@ -1,11 +1,10 @@
 import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import {settlementEpic, settlementSlice} from '@settlement';
 import {survivorEpic, survivorSlices} from '@survivor';
 import {combineEpics, createEpicMiddleware} from 'redux-observable';
 
 const epicMiddleware = createEpicMiddleware();
-const epics: any[] = [...survivorEpic];
-
-// const rootEpic = (action$: any) => combineEpics(...epics)(action$).pipe();
+const epics: any[] = [...survivorEpic, ...settlementEpic];
 
 const getStore = () => {
   const store = configureStore({
@@ -14,6 +13,7 @@ const getStore = () => {
       survivor2: survivorSlices.survivor2.reducer,
       survivor3: survivorSlices.survivor3.reducer,
       survivor4: survivorSlices.survivor4.reducer,
+      settlement: settlementSlice.reducer,
     },
     middleware: [...getDefaultMiddleware(), epicMiddleware],
   });

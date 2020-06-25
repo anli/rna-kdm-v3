@@ -1,7 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
-import {SettlementSelectors, settlementSlice} from '@settlement';
+import {
+  PrincipleId,
+  PrincipleValue,
+  SettlementSelectors,
+  settlementSlice,
+} from '@settlement';
 import {RootState} from '@store';
+import R from 'ramda';
 import {useEffect, useState} from 'react';
+import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
 
 const useSettlement = () => {
@@ -17,6 +24,7 @@ const useSettlement = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    preloadPrincipleImages(SettlementSelectors.allPrinciples);
     dispatch(settlementSlice.actions.load());
   }, [dispatch]);
 
@@ -69,3 +77,14 @@ const useSettlement = () => {
 };
 
 export default useSettlement;
+
+const preloadPrincipleImages = (
+  data: {[key in PrincipleId]: PrincipleValue[]},
+) => {
+  const principles = R.pipe(R.values, R.flatten)(data);
+  const sources = R.map((principle: PrincipleValue) => ({
+    uri: principle.imageUrl,
+  }))(principles);
+
+  FastImage.preload(sources);
+};

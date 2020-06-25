@@ -6,6 +6,10 @@ import styled from 'styled-components/native';
 interface Item {
   name: string;
   imageUrl: string;
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
 }
 
 interface Props {
@@ -27,6 +31,10 @@ const Gears = ({data, onPress, selectedIndex}: Props) => {
             key={index}
             subtitle={item?.name || 'None'}
             onPress={() => onPress(index, item)}
+            top={item?.top}
+            right={item?.right}
+            bottom={item?.bottom}
+            left={item?.left}
           />
         );
       })}

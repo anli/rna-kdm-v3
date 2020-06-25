@@ -26,6 +26,7 @@ const LOCATIONS = [
         name: 'Counterweighted Axe',
         imageUrl: 'https://imgur.com/39cSWbq.png',
         typeId: 'gear',
+        top: 'red',
       },
       {
         id: 'fingerOfgod',

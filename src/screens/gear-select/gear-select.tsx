@@ -24,6 +24,10 @@ const Component = () => {
                 key={item.id}
                 subtitle={item.name}
                 onPress={() => actions.select(item)}
+                top={item?.top}
+                left={item?.left}
+                bottom={item?.bottom}
+                right={item?.right}
               />
             );
           }}

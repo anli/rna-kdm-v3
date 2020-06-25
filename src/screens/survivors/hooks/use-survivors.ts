@@ -3,6 +3,7 @@ import {RootState} from '@store';
 import {SurvivorSelectors, survivorSlices} from '@survivor';
 import R from 'ramda';
 import {useEffect, useState} from 'react';
+import FastImage from 'react-native-fast-image';
 import {useDispatch, useSelector} from 'react-redux';
 
 type SliceProps = 'survivor1' | 'survivor2' | 'survivor3' | 'survivor4';
@@ -24,6 +25,7 @@ const useSurvivor = () => {
   const slice: SliceProps = params.slice;
 
   useEffect(() => {
+    preloadGearImages(SurvivorSelectors.allGears);
     dispatch(survivorSlices[slice].actions.load());
   }, [dispatch, slice]);
 
@@ -73,3 +75,15 @@ const useSurvivor = () => {
 };
 
 export default useSurvivor;
+
+const preloadGearImages = (locations: any[]) => {
+  const gears = R.pipe(
+    R.map((location: {data: any[]}) => location.data),
+    R.flatten,
+  )(locations);
+  const sources = R.map((gear: {imageUrl: string}) => ({
+    uri: gear.imageUrl,
+  }))(gears);
+
+  FastImage.preload(sources);
+};

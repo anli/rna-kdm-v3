@@ -39,9 +39,10 @@ defineFeature(feature, test => {
       fireEvent.press(component.getByTestId('Principle.newLife'));
     });
     then('I should see "Protect the Young Preview"', async () => {
-      expect(component.getByTestId('Preview').props.children.props.uri).toEqual(
-        'https://imgur.com/yFC0RJw.png',
-      );
+      expect(
+        component.getByTestId('Preview').props.children.props.children.props
+          .uri,
+      ).toEqual('https://imgur.com/yFC0RJw.png');
       return;
     });
     when('I press "Principle Select Button"', async () => {});

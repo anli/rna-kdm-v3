@@ -36,9 +36,10 @@ defineFeature(feature, test => {
     });
 
     then(/^I should see "Preview" is "Cloth"$/, async () => {
-      expect(component.getByTestId('Preview').props.children.props.uri).toEqual(
-        'https://imgur.com/9jQc0IC.png',
-      );
+      expect(
+        component.getByTestId('Preview').props.children.props.children.props
+          .uri,
+      ).toEqual('https://imgur.com/9jQc0IC.png');
     });
   });
 });

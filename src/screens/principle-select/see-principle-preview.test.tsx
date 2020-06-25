@@ -37,9 +37,10 @@ defineFeature(feature, test => {
       fireEvent.press(component.getByText('Survival of the Fittest'));
     });
     then('I should see Survival of the Fittest Preview', async () => {
-      expect(component.getByTestId('Preview').props.children.props.uri).toEqual(
-        'https://imgur.com/3J7hf4Q.png',
-      );
+      expect(
+        component.getByTestId('Preview').props.children.props.children.props
+          .uri,
+      ).toEqual('https://imgur.com/3J7hf4Q.png');
       return;
     });
   });

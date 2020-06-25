@@ -18,7 +18,12 @@ const Component = () => {
 
   return (
     <Screen testID="SettlementScreen">
-      <Preview height="240px" testID="Preview" uri={props.preview?.imageUrl} />
+      <Preview
+        height="240px"
+        testID="Preview"
+        uri={props.preview?.imageUrl}
+        imageHeight="360px"
+      />
       <List.Section>
         <List.Item
           testID="Principles"

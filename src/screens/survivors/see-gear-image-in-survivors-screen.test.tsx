@@ -64,14 +64,15 @@ defineFeature(feature, test => {
     then(/^I should see "Preview" is "(.*)"$/, async (result: string) => {
       if (result === 'Cloth') {
         expect(
-          component.getByTestId('Preview').props.children.props.uri,
+          component.getByTestId('Preview').props.children.props.children.props
+            .uri,
         ).toEqual('clothImageUrl');
         return;
       }
 
-      expect(component.getByTestId('Preview').props.children).toEqual(
-        undefined,
-      );
+      expect(
+        component.getByTestId('Preview').props.children.props.children,
+      ).toEqual(undefined);
       return;
     });
   });

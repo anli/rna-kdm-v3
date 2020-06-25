@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/anli/rna-kdm/compare/1.2.1...1.3.0) (2020-06-25)
+
+
+### Features
+
+* **gear:** add color code ([#17](https://github.com/anli/rna-kdm/issues/17)) ([3383f5e](https://github.com/anli/rna-kdm/commit/3383f5ef67bd530f69aa6adbf5196604c6e53562))
+* **preview:** add scrollview ([#18](https://github.com/anli/rna-kdm/issues/18)) ([646cfe2](https://github.com/anli/rna-kdm/commit/646cfe25acacc9cbae316498c9f32e158d7c3f6c))
+* **use-settlement:** add preload principle images ([#15](https://github.com/anli/rna-kdm/issues/15)) ([6cdd7b9](https://github.com/anli/rna-kdm/commit/6cdd7b9e9cf8bc1f599bc9451941726bb2d13473))
+* **use-survivors:** add image preload of gear ([#16](https://github.com/anli/rna-kdm/issues/16)) ([740384c](https://github.com/anli/rna-kdm/commit/740384cb640664957968f8fa1b039530d88cca03))
+
+
+
 ## [1.2.1](https://github.com/anli/rna-kdm/compare/1.2.0...1.2.1) (2020-06-24)
 
 

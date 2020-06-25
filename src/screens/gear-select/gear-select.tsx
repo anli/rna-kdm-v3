@@ -1,6 +1,7 @@
 import {FooterButtons, Gear, Preview, Screen} from '@components';
 import React from 'react';
-import {List} from 'react-native-paper';
+import HideWithKeyboard from 'react-native-hide-with-keyboard';
+import {List, Searchbar} from 'react-native-paper';
 import {SectionGrid} from 'react-native-super-grid';
 import styled from 'styled-components/native';
 import useGearSelect from './hooks';
@@ -9,7 +10,15 @@ const Component = () => {
   const {data, actions} = useGearSelect();
   return (
     <Screen testID="GearSelectScreen">
-      <Preview testID="Preview" uri={data.selected?.imageUrl} />
+      <Searchbar
+        testID="SearchField"
+        placeholder="Search"
+        onChangeText={actions.search}
+        value={data.searchText}
+      />
+      <HideWithKeyboard>
+        <Preview testID="Preview" uri={data.selected?.imageUrl} />
+      </HideWithKeyboard>
       <Section>
         <SectionGrid<any>
           itemDimension={130}

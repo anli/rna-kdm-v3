@@ -40,6 +40,7 @@
     "react-native": "0.61.5",
     "react-native-fast-image": "^8.1.5",
     "react-native-gesture-handler": "^1.6.1",
+    "react-native-hide-with-keyboard": "^1.2.1",
     "react-native-paper": "^3.10.1",
     "react-native-reanimated": "^1.9.0",
     "react-native-safe-area-context": "^3.0.5",
@@ -50,7 +51,8 @@
     "react-redux": "^7.2.0",
     "redux-observable": "^1.2.0",
     "rxjs": "^6.5.5",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "use-debounce": "^3.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

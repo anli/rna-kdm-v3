@@ -2,19 +2,22 @@
 
 import firestore from '@react-native-firebase/firestore';
 import {firestoreDoc$} from '@utils';
+import config from 'react-native-ultimate-config';
 import {StateObservable} from 'redux-observable';
 import {filter, map, switchMap} from 'rxjs/operators';
 import settlementSlice from './slice';
 
-const getDoc$ = (key: string, tenant: string = '12032016') =>
+const TENANT = config?.TENANT;
+
+const getDoc$ = (key: string) =>
   firestore()
     .collection(key)
-    .doc(tenant);
+    .doc(TENANT);
 
 const load = (action$: any) =>
   action$.pipe(
     filter((action: any) => action.type === settlementSlice.actions.load.type),
-    switchMap(() => firestoreDoc$<any>('settlement/12032016')),
+    switchMap(() => firestoreDoc$<any>(`settlement/${TENANT}`)),
     map(data => settlementSlice.actions.loadSuccess(data)),
   );
 

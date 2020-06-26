@@ -73,3 +73,6 @@ fastlane/screenshots
 !*.secret
 android/app/google-services.json
 certs/playstore.json
+
+# react-native-ultimate-config
+rnuc.xcconfig

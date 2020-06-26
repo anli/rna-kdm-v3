@@ -3,14 +3,17 @@
 import firestore from '@react-native-firebase/firestore';
 import {firestoreDoc$} from '@utils';
 import R from 'ramda';
+import config from 'react-native-ultimate-config';
 import {StateObservable} from 'redux-observable';
 import {filter, map, switchMap} from 'rxjs/operators';
 import {default as characterSlices, default as survivorSlices} from './slice';
 
-const getDoc$ = (slice: Slice, tenant: string = '12032016') =>
+const TENANT = config?.TENANT;
+
+const getDoc$ = (slice: Slice) =>
   firestore()
     .collection(slice)
-    .doc(tenant);
+    .doc(TENANT);
 
 const load$ = (slice: Slice) => (action$: any) =>
   action$.pipe(
@@ -18,7 +21,7 @@ const load$ = (slice: Slice) => (action$: any) =>
       (action: any) =>
         action.type === survivorSlices[slice].actions.load().type,
     ),
-    switchMap(() => firestoreDoc$<any>(`${slice}/12032016`)),
+    switchMap(() => firestoreDoc$<any>(`${slice}/${TENANT}`)),
     map(data => characterSlices[slice].actions.loadSuccess(data)),
   );
 

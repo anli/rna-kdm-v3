@@ -1,9 +1,9 @@
 {
   "name": "rna-kdm",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "scripts": {
-    "env:production": "npm run rnuc env/.env.development",
+    "env:production": "npm run rnuc env/.env.production",
     "env:development": "npm run rnuc env/.env.development",
     "rnuc": "$(npm bin)/rnuc",
     "android:deploy": "fastlane android deploy",

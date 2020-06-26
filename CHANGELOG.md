@@ -1,3 +1,13 @@
+# [1.4.0](https://github.com/anli/rna-kdm/compare/1.3.0...1.4.0) (2020-06-26)
+
+
+### Features
+
+* **epic:** add tenant code from env ([#20](https://github.com/anli/rna-kdm/issues/20)) ([cb9fb6b](https://github.com/anli/rna-kdm/commit/cb9fb6b5507d6c0c76c454eba15670a5cbe87d6d))
+* **gear-select:** add search gear ux ([#19](https://github.com/anli/rna-kdm/issues/19)) ([89d5d44](https://github.com/anli/rna-kdm/commit/89d5d44ef527bd3fcfba067875ba46a1248cd31c))
+
+
+
 # [1.3.0](https://github.com/anli/rna-kdm/compare/1.2.1...1.3.0) (2020-06-25)
 
 

@@ -70,6 +70,10 @@ const Component = () => {
           ))}
         </Principles>
       </List.Section>
+
+      <List.Section>
+        <List.Item testID="Innovations" title="Innovations" />
+      </List.Section>
     </Screen>
   );
 };

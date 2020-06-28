@@ -2,6 +2,7 @@
 
 import firestore from '@react-native-firebase/firestore';
 import {firestoreDoc$} from '@utils';
+import R from 'ramda';
 import config from 'react-native-ultimate-config';
 import {StateObservable} from 'redux-observable';
 import {filter, map, switchMap} from 'rxjs/operators';
@@ -129,10 +130,30 @@ const innovationSet = (action$: any, _: StateObservable<any>) =>
     }),
   );
 
+const innovationRemove = (action$: any, state$: StateObservable<any>) =>
+  action$.pipe(
+    filter(
+      (action: any) =>
+        action.type === settlementSlice.actions.innovationRemove.type,
+    ),
+    switchMap(async (action: any) => {
+      const idToRemove: string = action.payload;
+      const innovations = R.reject((n: string) => n === idToRemove)(
+        state$.value.settlement.innovations,
+      );
+
+      await getDoc$('settlement').update({
+        innovations,
+      });
+      return settlementSlice.actions.innovationSetSuccess();
+    }),
+  );
+
 export default [
   load,
   setPrinciple,
   principleReset,
   innovationReset,
   innovationSet,
+  innovationRemove,
 ];

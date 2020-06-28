@@ -14,7 +14,6 @@ const PRINCIPLES: {label: string; key: PrincipleKey}[] = [
   {label: 'Society', key: 'society'},
 ];
 
-/* istanbul ignore next */
 const Component = () => {
   const {props, actions} = useSettlement();
 
@@ -85,6 +84,12 @@ const Component = () => {
                   {...itemProps}
                   icon="sync"
                   onPress={actions.innovationReset}
+                />
+                <IconButton
+                  testID="InnovationRemoveButton"
+                  {...itemProps}
+                  icon="delete"
+                  onPress={actions.innovationRemove}
                 />
                 <IconButton
                   testID="InnovationAddButton"

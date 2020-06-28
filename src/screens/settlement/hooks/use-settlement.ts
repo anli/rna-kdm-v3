@@ -88,11 +88,18 @@ const useSettlement = () => {
     dispatch(settlementSlice.actions.innovationReset());
   };
 
-  /* istanbul ignore next */
   const innovationSelected = (id: string, item: any) => {
     setPreview(item);
     setPrincipleSelectedId(undefined);
     setInnovationSelectedId(id);
+  };
+
+  const innovationRemove = () => {
+    if (innovationSelectedId) {
+      dispatch(settlementSlice.actions.innovationRemove(innovationSelectedId));
+      setInnovationSelectedId(undefined);
+      setPreview(undefined);
+    }
   };
 
   const actions = {
@@ -103,6 +110,7 @@ const useSettlement = () => {
     innovationAdd,
     innovationReset,
     innovationSelected,
+    innovationRemove,
   };
 
   return {props, actions};

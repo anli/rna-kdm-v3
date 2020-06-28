@@ -7,6 +7,7 @@ const initialState = {
     conviction: undefined,
     society: undefined,
   },
+  innovations: [],
 };
 const settlementSlice = getSettlementSlice(initialState);
 

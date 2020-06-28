@@ -19,12 +19,20 @@ const useSettlement = () => {
     string | undefined
   >(undefined);
   const {navigate} = useNavigation();
+  const dispatch = useDispatch();
   const state = useSelector<RootState, RootState>(res => res);
   const principles = SettlementSelectors.getPrinciples(state);
-  const dispatch = useDispatch();
+  const innovations = SettlementSelectors.getInnovations(state);
+  const [innovationSelectedId, setInnovationSelectedId] = useState<
+    string | undefined
+  >(undefined);
 
   useEffect(() => {
-    preloadPrincipleImages(SettlementSelectors.allPrinciples);
+    const sources = [
+      ...getPrincipleImageSources(SettlementSelectors.allPrinciples),
+      ...getInnovationImageSources(SettlementSelectors.allInnovations),
+    ];
+    FastImage.preload(sources);
     dispatch(settlementSlice.actions.load());
   }, [dispatch]);
 
@@ -32,11 +40,14 @@ const useSettlement = () => {
     principles,
     principleSelectedId,
     preview,
+    innovations,
+    innovationSelectedId,
   };
 
   const principleSelected = (id: string, item: any) => {
     setPreview(item);
     setPrincipleSelectedId(id);
+    setInnovationSelectedId(undefined);
   };
 
   const principleSet = () => {
@@ -66,11 +77,32 @@ const useSettlement = () => {
     }
   };
 
+  const innovationAdd = () => {
+    const innovationIds = R.pluck('id')(innovations);
+    navigate('InnovationSelectScreen', {
+      innovations: innovationIds,
+    });
+  };
+
+  const innovationReset = () => {
+    dispatch(settlementSlice.actions.innovationReset());
+  };
+
+  /* istanbul ignore next */
+  const innovationSelected = (id: string, item: any) => {
+    setPreview(item);
+    setPrincipleSelectedId(undefined);
+    setInnovationSelectedId(id);
+  };
+
   const actions = {
     principleSelected,
     principleSet,
     principleReset,
     principleRemove,
+    innovationAdd,
+    innovationReset,
+    innovationSelected,
   };
 
   return {props, actions};
@@ -78,13 +110,15 @@ const useSettlement = () => {
 
 export default useSettlement;
 
-const preloadPrincipleImages = (
+const getPrincipleImageSources = (
   data: {[key in PrincipleId]: PrincipleValue[]},
 ) => {
   const principles = R.pipe(R.values, R.flatten)(data);
-  const sources = R.map((principle: PrincipleValue) => ({
+  return R.map((principle: PrincipleValue) => ({
     uri: principle.imageUrl,
   }))(principles);
+};
 
-  FastImage.preload(sources);
+const getInnovationImageSources = (data: {imageUrl: string}[]) => {
+  return data.map(item => ({uri: item.imageUrl}));
 };

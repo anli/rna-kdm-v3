@@ -2,13 +2,13 @@ import {FooterButtons, Gear, Preview, Screen} from '@components';
 import React from 'react';
 import {FlatList} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
-import usePrincipleSelect from './hooks';
+import useInnovationSelect from './hooks';
 
 const Component = () => {
-  const {props, actions} = usePrincipleSelect();
+  const {props, actions} = useInnovationSelect();
 
   return (
-    <Screen testID="PrincipleSelectScreen">
+    <Screen testID="InnovationSelectScreen">
       <Preview
         height="240px"
         imageHeight="360px"

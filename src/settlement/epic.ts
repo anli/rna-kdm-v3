@@ -79,4 +79,60 @@ const principleReset = (action$: any, _: StateObservable<any>) =>
     }),
   );
 
-export default [load, setPrinciple, principleReset];
+const innovationReset = (action$: any, _: StateObservable<any>) =>
+  action$.pipe(
+    filter(
+      (action: any) =>
+        action.type === settlementSlice.actions.innovationReset.type,
+    ),
+    switchMap(async () => {
+      const innovations: any[] = [];
+
+      const {exists} = await getDoc$('settlement').get();
+
+      if (exists) {
+        await getDoc$('settlement').update({
+          innovations,
+        });
+        return settlementSlice.actions.innovationResetSuccess();
+      }
+
+      await getDoc$('settlement').set({
+        innovations,
+      });
+      return settlementSlice.actions.innovationResetSuccess();
+    }),
+  );
+
+const innovationSet = (action$: any, _: StateObservable<any>) =>
+  action$.pipe(
+    filter(
+      (action: any) =>
+        action.type === settlementSlice.actions.innovationSet.type,
+    ),
+    switchMap(async (action: any) => {
+      const innovations: any[] = action.payload;
+
+      const {exists} = await getDoc$('settlement').get();
+
+      if (exists) {
+        await getDoc$('settlement').update({
+          innovations,
+        });
+        return settlementSlice.actions.innovationSetSuccess();
+      }
+
+      await getDoc$('settlement').set({
+        innovations,
+      });
+      return settlementSlice.actions.innovationSetSuccess();
+    }),
+  );
+
+export default [
+  load,
+  setPrinciple,
+  principleReset,
+  innovationReset,
+  innovationSet,
+];

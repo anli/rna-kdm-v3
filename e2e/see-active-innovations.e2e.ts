@@ -1,9 +1,7 @@
 import {by, device, element, expect} from 'detox';
 import {defineFeature, loadFeature} from 'jest-cucumber';
 
-const feature = loadFeature('./see-active-innovations.feature', {
-  loadRelativePath: true,
-});
+const feature = loadFeature('./e2e/see-active-innovations.feature');
 
 defineFeature(feature, test => {
   beforeEach(async () => {

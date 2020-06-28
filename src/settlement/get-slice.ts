@@ -10,6 +10,7 @@ export type PrincipleId = 'newLife' | 'death' | 'conviction' | 'society';
 
 export interface SettlementState {
   principles?: {[key in PrincipleId]?: PrincipleValue};
+  innovations?: string[];
 }
 
 /* istanbul ignore next */
@@ -31,6 +32,10 @@ const getSettlementSlice = (initialState: SettlementState) =>
       },
       principleReset: () => {},
       principleResetSuccess: () => {},
+      innovationReset: () => {},
+      innovationResetSuccess: () => {},
+      innovationSet: (_: SettlementState, __: PayloadAction<string[]>) => {},
+      innovationSetSuccess: () => {},
     },
   });
 

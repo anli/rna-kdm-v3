@@ -97,6 +97,12 @@ const Component = () => {
                   icon="plus"
                   onPress={actions.innovationAdd}
                 />
+                <IconButton
+                  testID="InnovationDrawButton"
+                  {...itemProps}
+                  icon="star"
+                  onPress={actions.innovationDraw}
+                />
               </>
             )}
           />

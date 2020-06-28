@@ -102,6 +102,14 @@ const useSettlement = () => {
     }
   };
 
+  const innovationDraw = () => {
+    const innovationIds = R.pluck('id')(innovations);
+    navigate('InnovationSelectScreen', {
+      innovations: innovationIds,
+      isDraw: true,
+    });
+  };
+
   const actions = {
     principleSelected,
     principleSet,
@@ -111,6 +119,7 @@ const useSettlement = () => {
     innovationReset,
     innovationSelected,
     innovationRemove,
+    innovationDraw,
   };
 
   return {props, actions};

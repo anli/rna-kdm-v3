@@ -1,4 +1,6 @@
 import {createSelector} from '@reduxjs/toolkit';
+import {shuffle} from '@utils';
+import R from 'ramda';
 import {PrincipleId, PrincipleValue} from './get-slice';
 
 const PRINCIPLES = {
@@ -268,9 +270,26 @@ const getInnovations = createSelector<any, any, any[]>(
   },
 );
 
+const drawInnovation = (currentInnovationIds: string[]) => {
+  const innovationUnlocks = currentInnovationIds
+    .map(n => INNOVATIONS.find(x => x.id === n))
+    .filter(n => !R.isNil(n?.unlocks))
+    .map(n => n?.unlocks);
+
+  const unlockIds = R.flatten(innovationUnlocks).filter(
+    n => !R.contains(n, currentInnovationIds),
+  );
+
+  return R.slice(
+    0,
+    2,
+  )(shuffle(unlockIds.map(n => INNOVATIONS.find(x => x.id === n))));
+};
+
 export default class {
   static getPrinciples = getPrinciples;
   static allPrinciples = PRINCIPLES;
   static getInnovations = getInnovations;
   static allInnovations = INNOVATIONS;
+  static drawInnovation = drawInnovation;
 }

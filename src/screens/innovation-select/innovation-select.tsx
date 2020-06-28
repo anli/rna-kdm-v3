@@ -17,6 +17,7 @@ const Component = () => {
       />
       <List>
         <FlatList
+          testID="Innovations"
           data={props.data}
           renderItem={({item}) => (
             <Gear

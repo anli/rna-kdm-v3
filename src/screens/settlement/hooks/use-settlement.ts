@@ -26,6 +26,7 @@ const useSettlement = () => {
   const [innovationSelectedId, setInnovationSelectedId] = useState<
     string | undefined
   >(undefined);
+  const event = SettlementSelectors.getEvent(state);
 
   useEffect(() => {
     const sources = [
@@ -42,6 +43,7 @@ const useSettlement = () => {
     preview,
     innovations,
     innovationSelectedId,
+    event,
   };
 
   const principleSelected = (id: string, item: any) => {
@@ -110,6 +112,17 @@ const useSettlement = () => {
     });
   };
 
+  const settlementEventDraw = () => {
+    dispatch(settlementSlice.actions.settlementEventDraw());
+  };
+
+  /* istanbul ignore next */
+  const settlementEventView = () => {
+    setPreview(props.event);
+    setPrincipleSelectedId(undefined);
+    setInnovationSelectedId(undefined);
+  };
+
   const actions = {
     principleSelected,
     principleSet,
@@ -120,6 +133,8 @@ const useSettlement = () => {
     innovationSelected,
     innovationRemove,
     innovationDraw,
+    settlementEventDraw,
+    settlementEventView,
   };
 
   return {props, actions};

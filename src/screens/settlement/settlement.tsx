@@ -19,13 +19,15 @@ const Component = () => {
 
   return (
     <Screen testID="SettlementScreen">
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Preview
-          height="240px"
-          testID="Preview"
-          uri={props.preview?.imageUrl}
-          imageHeight="360px"
-        />
+      <Preview
+        height="240px"
+        testID="Preview"
+        uri={props.preview?.imageUrl}
+        imageHeight="360px"
+      />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        testID="SettlementScreen.ScrollView">
         <List.Section>
           <List.Item
             testID="Principles"
@@ -120,6 +122,25 @@ const Component = () => {
               />
             ))}
           </Innovations>
+        </List.Section>
+
+        <List.Section>
+          <List.Item
+            testID="SettlementEvent"
+            title="Events"
+            description={props.event?.name}
+            right={itemProps => (
+              <>
+                <IconButton
+                  testID="SettlementEventDrawButton"
+                  {...itemProps}
+                  icon="star"
+                  onPress={actions.settlementEventDraw}
+                />
+              </>
+            )}
+            onPress={actions.settlementEventView}
+          />
         </List.Section>
       </ScrollView>
     </Screen>

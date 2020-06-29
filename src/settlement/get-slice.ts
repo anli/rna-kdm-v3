@@ -38,6 +38,8 @@ const getSettlementSlice = (initialState: SettlementState) =>
       innovationSetSuccess: () => {},
       innovationRemove: (_: SettlementState, __: PayloadAction<string>) => {},
       innovationRemoveSuccess: () => {},
+      settlementEventDraw: () => {},
+      settlementEventDrawSuccess: () => {},
     },
   });
 

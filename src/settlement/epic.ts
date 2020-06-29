@@ -1,11 +1,12 @@
 /* istanbul ignore file */
 
 import firestore from '@react-native-firebase/firestore';
-import {firestoreDoc$} from '@utils';
+import {firestoreDoc$, shuffle} from '@utils';
 import R from 'ramda';
 import config from 'react-native-ultimate-config';
 import {StateObservable} from 'redux-observable';
 import {filter, map, switchMap} from 'rxjs/operators';
+import selectors from './selectors';
 import settlementSlice from './slice';
 
 const TENANT = config?.TENANT;
@@ -149,6 +150,22 @@ const innovationRemove = (action$: any, state$: StateObservable<any>) =>
     }),
   );
 
+const settlementEventDraw = (action$: any, _: StateObservable<any>) =>
+  action$.pipe(
+    filter(
+      (action: any) =>
+        action.type === settlementSlice.actions.settlementEventDraw.type,
+    ),
+    switchMap(async () => {
+      const event = shuffle(selectors.allEvents)[0];
+
+      await getDoc$('settlement').update({
+        event,
+      });
+      return settlementSlice.actions.settlementEventDrawSuccess();
+    }),
+  );
+
 export default [
   load,
   setPrinciple,
@@ -156,4 +173,5 @@ export default [
   innovationReset,
   innovationSet,
   innovationRemove,
+  settlementEventDraw,
 ];

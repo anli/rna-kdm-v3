@@ -142,6 +142,9 @@ const Component = () => {
             onPress={actions.settlementEventView}
           />
         </List.Section>
+        <List.Section>
+          <List.Item testID="SettlementLocations" title="Locations" />
+        </List.Section>
       </ScrollView>
     </Screen>
   );

@@ -27,6 +27,10 @@ const useSettlement = () => {
     string | undefined
   >(undefined);
   const event = SettlementSelectors.getEvent(state);
+  const locations = SettlementSelectors.getLocations(state);
+  const [locationSelectedId, setLocationSelectedId] = useState<
+    string | undefined
+  >(undefined);
 
   useEffect(() => {
     const sources = [
@@ -44,6 +48,8 @@ const useSettlement = () => {
     innovations,
     innovationSelectedId,
     event,
+    locations,
+    locationSelectedId,
   };
 
   const principleSelected = (id: string, item: any) => {
@@ -123,6 +129,21 @@ const useSettlement = () => {
     setInnovationSelectedId(undefined);
   };
 
+  const locationAdd = () => {
+    navigate('LocationSelectScreen');
+  };
+
+  const locationSelected = (id: string, item: any) => {
+    setPreview(item);
+    setPrincipleSelectedId(undefined);
+    setInnovationSelectedId(undefined);
+    setLocationSelectedId(id);
+  };
+
+  const locationReset = () => {
+    dispatch(settlementSlice.actions.locationReset());
+  };
+
   const actions = {
     principleSelected,
     principleSet,
@@ -135,6 +156,9 @@ const useSettlement = () => {
     innovationDraw,
     settlementEventDraw,
     settlementEventView,
+    locationAdd,
+    locationSelected,
+    locationReset,
   };
 
   return {props, actions};

@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {
   GearSelectScreen,
   InnovationSelectScreen,
+  LocationSelectScreen,
   PrincipleSelectScreen,
   SettlementScreen,
   SurvivorsScreen,
@@ -122,6 +123,11 @@ const App = () => {
               name="InnovationSelectScreen"
               component={InnovationSelectScreen.Component}
               options={InnovationSelectScreen.options}
+            />
+            <RootStack.Screen
+              name="LocationSelectScreen"
+              component={LocationSelectScreen.Component}
+              options={LocationSelectScreen.options}
             />
           </RootStack.Navigator>
         </NavigationContainer>

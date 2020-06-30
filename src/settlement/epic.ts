@@ -166,6 +166,50 @@ const settlementEventDraw = (action$: any, _: StateObservable<any>) =>
     }),
   );
 
+const locationAdd = (action$: any, state$: StateObservable<any>) =>
+  action$.pipe(
+    filter(
+      (action: any) => action.type === settlementSlice.actions.locationAdd.type,
+    ),
+    switchMap(async (action: any) => {
+      const locations = [
+        ...(state$.value.settlement?.locations || []),
+        action.payload,
+      ];
+
+      const {exists} = await getDoc$('settlement').get();
+
+      if (exists) {
+        await getDoc$('settlement').update({
+          locations,
+        });
+        return settlementSlice.actions.locationAddSuccess();
+      }
+
+      await getDoc$('settlement').set({
+        locations,
+      });
+      return settlementSlice.actions.locationAddSuccess();
+    }),
+  );
+
+const locationReset = (action$: any, _: StateObservable<any>) =>
+  action$.pipe(
+    filter(
+      (action: any) =>
+        action.type === settlementSlice.actions.locationReset.type,
+    ),
+    switchMap(async () => {
+      const locations: any[] = [];
+
+      await getDoc$('settlement').update({
+        locations,
+      });
+
+      return settlementSlice.actions.locationResetSuccess();
+    }),
+  );
+
 export default [
   load,
   setPrinciple,
@@ -174,4 +218,6 @@ export default [
   innovationSet,
   innovationRemove,
   settlementEventDraw,
+  locationAdd,
+  locationReset,
 ];

@@ -143,8 +143,39 @@ const Component = () => {
           />
         </List.Section>
         <List.Section>
-          <List.Item testID="SettlementLocations" title="Locations" />
+          <List.Item
+            testID="SettlementLocations"
+            title="Locations"
+            right={itemProps => (
+              <>
+                <IconButton
+                  testID="LocationResetButton"
+                  {...itemProps}
+                  icon="sync"
+                  onPress={actions.locationReset}
+                />
+                <IconButton
+                  testID="LocationAddButton"
+                  {...itemProps}
+                  icon="plus"
+                  onPress={actions.locationAdd}
+                />
+              </>
+            )}
+          />
         </List.Section>
+        <Innovations horizontal showsHorizontalScrollIndicator={false}>
+          {props.locations.map(location => (
+            <Gear
+              key={location.id}
+              selected={location.id === props.locationSelectedId}
+              testID={`Location.${location.id}`}
+              width="120px"
+              subtitle={location.name}
+              onPress={() => actions.locationSelected(location.id, location)}
+            />
+          ))}
+        </Innovations>
       </ScrollView>
     </Screen>
   );

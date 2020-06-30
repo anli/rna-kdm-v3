@@ -45,6 +45,8 @@ const getSettlementSlice = (initialState: SettlementState) =>
       locationAddSuccess: () => {},
       locationReset: () => {},
       locationResetSuccess: () => {},
+      locationRemove: (_: SettlementState, __: PayloadAction<string>) => {},
+      locationRemoveSuccess: () => {},
     },
   });
 

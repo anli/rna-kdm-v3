@@ -155,6 +155,12 @@ const Component = () => {
                   onPress={actions.locationReset}
                 />
                 <IconButton
+                  testID="LocationRemoveButton"
+                  {...itemProps}
+                  icon="delete"
+                  onPress={actions.locationRemove}
+                />
+                <IconButton
                   testID="LocationAddButton"
                   {...itemProps}
                   icon="plus"

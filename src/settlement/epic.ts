@@ -146,7 +146,7 @@ const innovationRemove = (action$: any, state$: StateObservable<any>) =>
       await getDoc$('settlement').update({
         innovations,
       });
-      return settlementSlice.actions.innovationSetSuccess();
+      return settlementSlice.actions.innovationRemoveSuccess();
     }),
   );
 
@@ -210,6 +210,25 @@ const locationReset = (action$: any, _: StateObservable<any>) =>
     }),
   );
 
+const locationRemove = (action$: any, state$: StateObservable<any>) =>
+  action$.pipe(
+    filter(
+      (action: any) =>
+        action.type === settlementSlice.actions.locationRemove.type,
+    ),
+    switchMap(async (action: any) => {
+      const idToRemove: string = action.payload;
+      const locations = R.reject((n: string) => n === idToRemove)(
+        state$.value.settlement.locations,
+      );
+
+      await getDoc$('settlement').update({
+        locations,
+      });
+      return settlementSlice.actions.locationRemoveSuccess();
+    }),
+  );
+
 export default [
   load,
   setPrinciple,
@@ -220,4 +239,5 @@ export default [
   settlementEventDraw,
   locationAdd,
   locationReset,
+  locationRemove,
 ];

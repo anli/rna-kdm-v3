@@ -144,6 +144,14 @@ const useSettlement = () => {
     dispatch(settlementSlice.actions.locationReset());
   };
 
+  const locationRemove = () => {
+    if (locationSelectedId) {
+      dispatch(settlementSlice.actions.locationRemove(locationSelectedId));
+      setLocationSelectedId(undefined);
+      setPreview(undefined);
+    }
+  };
+
   const actions = {
     principleSelected,
     principleSet,
@@ -159,6 +167,7 @@ const useSettlement = () => {
     locationAdd,
     locationSelected,
     locationReset,
+    locationRemove,
   };
 
   return {props, actions};

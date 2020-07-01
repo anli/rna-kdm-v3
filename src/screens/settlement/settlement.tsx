@@ -182,6 +182,52 @@ const Component = () => {
             />
           ))}
         </Innovations>
+        <List.Section>
+          <List.Item
+            title="Weapon Specialization"
+            right={itemProps => (
+              <>
+                <IconButton
+                  testID="WeaponSpecializationResetButton"
+                  {...itemProps}
+                  icon="sync"
+                  onPress={actions.weaponSpecializationReset}
+                />
+                <IconButton
+                  testID="WeaponSpecializationRemoveButton"
+                  {...itemProps}
+                  icon="delete"
+                  onPress={actions.weaponSpecializationRemove}
+                />
+                <IconButton
+                  testID="WeaponSpecializationAddButton"
+                  {...itemProps}
+                  icon="plus"
+                  onPress={actions.weaponSpecializationAdd}
+                />
+              </>
+            )}
+          />
+        </List.Section>
+        <Innovations horizontal showsHorizontalScrollIndicator={false}>
+          {props.weaponSpecializations.map(weaponSpecialization => (
+            <Gear
+              key={weaponSpecialization.id}
+              selected={
+                weaponSpecialization.id === props.weaponSpecializationSelectedId
+              }
+              testID={`WeaponSpecialization.${weaponSpecialization.id}`}
+              width="120px"
+              subtitle={weaponSpecialization.name}
+              onPress={() =>
+                actions.weaponSpecializationSelected(
+                  weaponSpecialization.id,
+                  weaponSpecialization,
+                )
+              }
+            />
+          ))}
+        </Innovations>
       </ScrollView>
     </Screen>
   );

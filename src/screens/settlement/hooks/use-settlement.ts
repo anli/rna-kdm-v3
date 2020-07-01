@@ -31,6 +31,13 @@ const useSettlement = () => {
   const [locationSelectedId, setLocationSelectedId] = useState<
     string | undefined
   >(undefined);
+  const weaponSpecializations = SettlementSelectors.getWeaponSpecializations(
+    state,
+  );
+  const [
+    weaponSpecializationSelectedId,
+    setWeaponSpecializationSelectedId,
+  ] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const sources = [
@@ -50,6 +57,8 @@ const useSettlement = () => {
     event,
     locations,
     locationSelectedId,
+    weaponSpecializations,
+    weaponSpecializationSelectedId,
   };
 
   const principleSelected = (id: string, item: any) => {
@@ -99,6 +108,8 @@ const useSettlement = () => {
   const innovationSelected = (id: string, item: any) => {
     setPreview(item);
     setPrincipleSelectedId(undefined);
+    setLocationSelectedId(undefined);
+    setWeaponSpecializationSelectedId(undefined);
     setInnovationSelectedId(id);
   };
 
@@ -127,6 +138,7 @@ const useSettlement = () => {
     setPreview(props.event);
     setPrincipleSelectedId(undefined);
     setInnovationSelectedId(undefined);
+    setWeaponSpecializationSelectedId(undefined);
   };
 
   const locationAdd = () => {
@@ -137,6 +149,7 @@ const useSettlement = () => {
     setPreview(item);
     setPrincipleSelectedId(undefined);
     setInnovationSelectedId(undefined);
+    setWeaponSpecializationSelectedId(undefined);
     setLocationSelectedId(id);
   };
 
@@ -148,6 +161,35 @@ const useSettlement = () => {
     if (locationSelectedId) {
       dispatch(settlementSlice.actions.locationRemove(locationSelectedId));
       setLocationSelectedId(undefined);
+      setPreview(undefined);
+    }
+  };
+
+  const weaponSpecializationAdd = () => {
+    navigate('WeaponSpecializationSelectScreen');
+  };
+
+  const weaponSpecializationSelected = (id: string, item: any) => {
+    setPreview(item);
+    setPrincipleSelectedId(undefined);
+    setInnovationSelectedId(undefined);
+    setLocationSelectedId(undefined);
+    setWeaponSpecializationSelectedId(id);
+  };
+
+  const weaponSpecializationReset = () => {
+    dispatch(settlementSlice.actions.weaponSpecializationReset());
+  };
+
+  /* istanbul ignore next */
+  const weaponSpecializationRemove = () => {
+    if (weaponSpecializationSelectedId) {
+      dispatch(
+        settlementSlice.actions.weaponSpecializationRemove(
+          weaponSpecializationSelectedId,
+        ),
+      );
+      setWeaponSpecializationSelectedId(undefined);
       setPreview(undefined);
     }
   };
@@ -168,6 +210,10 @@ const useSettlement = () => {
     locationSelected,
     locationReset,
     locationRemove,
+    weaponSpecializationAdd,
+    weaponSpecializationSelected,
+    weaponSpecializationReset,
+    weaponSpecializationRemove,
   };
 
   return {props, actions};

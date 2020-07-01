@@ -7,7 +7,7 @@ import React from 'react';
 import 'react-native';
 import {fireEvent, RenderAPI} from 'react-native-testing-library';
 import * as redux from 'react-redux';
-import SettlementScreen from './settlement';
+import SettlementScreen from '../settlement';
 
 const feature = loadFeature('./e2e/add-location.feature');
 

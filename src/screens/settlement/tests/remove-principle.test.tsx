@@ -3,20 +3,25 @@ import {getSettlementSlice} from '@settlement';
 import {render} from '@test';
 import {defineFeature, loadFeature} from 'jest-cucumber';
 import React from 'react';
+import 'react-native';
 import {fireEvent, RenderAPI} from 'react-native-testing-library';
-import SettlementScreen from './settlement';
+import * as redux from 'react-redux';
+import SettlementScreen from '../settlement';
 
-const feature = loadFeature('./e2e/see-principle-preview.feature');
+const feature = loadFeature('e2e/remove-principle.feature');
 
 defineFeature(feature, test => {
   let component: RenderAPI;
+  const mockDispatch = jest.fn();
 
-  beforeEach(async () => {});
+  beforeEach(async () => {
+    jest.spyOn(redux, 'useDispatch').mockReturnValue(mockDispatch);
+    mockDispatch.mockReset();
+  });
 
-  test('see active principle preview', ({given, when, then}) => {
+  test('remove active principle', ({given, when, then}) => {
     given('I am any', async () => {});
-    given('data of "New life" is "Protect the Young"', async () => {});
-    given('I am at "Settlement Screen"', async () => {
+    given('data of "New Life" is "Protect the Young"', async () => {
       const store = configureStore({
         reducer: {
           settlement: getSettlementSlice({
@@ -35,19 +40,22 @@ defineFeature(feature, test => {
       });
       component = render(<SettlementScreen.Component />, store);
     });
-    when('I press "Protect the Young"', async () => {
+    given('I am at "Settlement Screen"', async () => {});
+    when('I press "New Life"', async () => {
+      fireEvent.press(component.getByTestId('PrincipleRemoveButton'));
       fireEvent.press(component.getByTestId('Principle.newLife'));
     });
-    then('I should see "Protect the Young Preview"', async () => {
-      expect(
-        component.getByTestId('Preview').props.children.props.children.props
-          .uri,
-      ).toEqual('https://imgur.com/yFC0RJw.png');
-      return;
+    when('I press "Remove Principle Button"', async () => {
+      fireEvent.press(component.getByTestId('PrincipleRemoveButton'));
     });
-    when('I press "Principle Select Button"', async () => {});
-    when('I should see "Principle Select Screen"', async () => {});
-    when('I press "Survival of the Fittest"', async () => {});
-    then('I should see Survival of the Fittest Preview', async () => {});
+    then('I should not see "Protect the Young"', async () => {
+      expect(mockDispatch).toBeCalledWith({
+        payload: {
+          id: 'newLife',
+          item: undefined,
+        },
+        type: 'settlement/setPrinciple',
+      });
+    });
   });
 });

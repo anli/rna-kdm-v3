@@ -229,6 +229,73 @@ const locationRemove = (action$: any, state$: StateObservable<any>) =>
     }),
   );
 
+const weaponSpecializationAdd = (action$: any, state$: StateObservable<any>) =>
+  action$.pipe(
+    filter(
+      (action: any) =>
+        action.type === settlementSlice.actions.weaponSpecializationAdd.type,
+    ),
+    switchMap(async (action: any) => {
+      const weaponSpecializations = [
+        ...(state$.value.settlement?.weaponSpecializations || []),
+        action.payload,
+      ];
+
+      const {exists} = await getDoc$('settlement').get();
+
+      if (exists) {
+        await getDoc$('settlement').update({
+          weaponSpecializations,
+        });
+        return settlementSlice.actions.weaponSpecializationAddSuccess();
+      }
+
+      await getDoc$('settlement').set({
+        weaponSpecializations,
+      });
+      return settlementSlice.actions.weaponSpecializationAddSuccess();
+    }),
+  );
+
+const weaponSpecializationReset = (action$: any, _: StateObservable<any>) =>
+  action$.pipe(
+    filter(
+      (action: any) =>
+        action.type === settlementSlice.actions.weaponSpecializationReset.type,
+    ),
+    switchMap(async () => {
+      const weaponSpecializations: any[] = [];
+
+      await getDoc$('settlement').update({
+        weaponSpecializations,
+      });
+
+      return settlementSlice.actions.weaponSpecializationResetSuccess();
+    }),
+  );
+
+const weaponSpecializationRemove = (
+  action$: any,
+  state$: StateObservable<any>,
+) =>
+  action$.pipe(
+    filter(
+      (action: any) =>
+        action.type === settlementSlice.actions.weaponSpecializationRemove.type,
+    ),
+    switchMap(async (action: any) => {
+      const idToRemove: string = action.payload;
+      const weaponSpecializations = R.reject((n: string) => n === idToRemove)(
+        state$.value.settlement.weaponSpecializations,
+      );
+
+      await getDoc$('settlement').update({
+        weaponSpecializations,
+      });
+      return settlementSlice.actions.weaponSpecializationRemoveSuccess();
+    }),
+  );
+
 export default [
   load,
   setPrinciple,
@@ -240,4 +307,7 @@ export default [
   locationAdd,
   locationReset,
   locationRemove,
+  weaponSpecializationAdd,
+  weaponSpecializationReset,
+  weaponSpecializationRemove,
 ];

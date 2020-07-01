@@ -7,9 +7,9 @@ import React from 'react';
 import 'react-native';
 import {fireEvent, RenderAPI} from 'react-native-testing-library';
 import * as redux from 'react-redux';
-import SettlementScreen from './settlement';
+import SettlementScreen from '../settlement';
 
-const feature = loadFeature('./e2e/draw-random-innovation.feature');
+const feature = loadFeature('./e2e/remove-location.feature');
 
 defineFeature(feature, test => {
   let component: RenderAPI;
@@ -22,9 +22,9 @@ defineFeature(feature, test => {
     mockDispatch.mockReset();
   });
 
-  test('Draw 2 random innovation for selection', ({given, when, then}) => {
+  test('remove location', ({given, when, then}) => {
     given('I am any', async () => {});
-    given('data of "Active Innovations" is "Language"', async () => {
+    given('data of "Locations" is "Blacksmith"', async () => {
       store = configureStore({
         reducer: {
           settlement: getSettlementSlice({
@@ -34,21 +34,25 @@ defineFeature(feature, test => {
               conviction: undefined,
               society: undefined,
             },
-            innovations: ['language'],
+            locations: ['blacksmith'],
           }).reducer,
         },
       });
     });
-    when('I am at "Settlement Screen"', async () => {
+    given('I am at "Settlement Screen"', async () => {
       component = render(<SettlementScreen.Component />, store);
     });
-    when('I press "Draw Random Innovation Button"', async () => {
-      fireEvent.press(component.getByTestId('InnovationDrawButton'));
+    when('I press "Blacksmith"', async () => {
+      fireEvent.press(component.getByTestId('LocationRemoveButton'));
+      fireEvent.press(component.getByText('Blacksmith'));
     });
-    then('I should see "Innovation Select Screen"', async () => {
-      expect(mockNavigate).toBeCalledWith('InnovationSelectScreen', {
-        innovations: ['language'],
-        isDraw: true,
+    when('I press "Location Remove Button"', async () => {
+      fireEvent.press(component.getByTestId('LocationRemoveButton'));
+    });
+    then('I should see "No Blacksmith"', async () => {
+      expect(mockDispatch).toHaveBeenLastCalledWith({
+        payload: 'blacksmith',
+        type: 'settlement/locationRemove',
       });
     });
   });

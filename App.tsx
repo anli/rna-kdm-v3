@@ -9,6 +9,7 @@ import {
   PrincipleSelectScreen,
   SettlementScreen,
   SurvivorsScreen,
+  WeaponSpecializationSelectScreen,
 } from '@screens';
 import {store} from '@store';
 import React from 'react';
@@ -128,6 +129,11 @@ const App = () => {
               name="LocationSelectScreen"
               component={LocationSelectScreen.Component}
               options={LocationSelectScreen.options}
+            />
+            <RootStack.Screen
+              name="WeaponSpecializationSelectScreen"
+              component={WeaponSpecializationSelectScreen.Component}
+              options={WeaponSpecializationSelectScreen.options}
             />
           </RootStack.Navigator>
         </NavigationContainer>

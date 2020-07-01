@@ -12,6 +12,7 @@ export interface SettlementState {
   principles?: {[key in PrincipleId]?: PrincipleValue};
   innovations?: string[];
   locations?: string[];
+  weaponSpecializations?: string[];
 }
 
 /* istanbul ignore next */
@@ -47,6 +48,18 @@ const getSettlementSlice = (initialState: SettlementState) =>
       locationResetSuccess: () => {},
       locationRemove: (_: SettlementState, __: PayloadAction<string>) => {},
       locationRemoveSuccess: () => {},
+      weaponSpecializationAdd: (
+        _: SettlementState,
+        __: PayloadAction<string[]>,
+      ) => {},
+      weaponSpecializationAddSuccess: () => {},
+      weaponSpecializationReset: () => {},
+      weaponSpecializationResetSuccess: () => {},
+      weaponSpecializationRemove: (
+        _: SettlementState,
+        __: PayloadAction<string>,
+      ) => {},
+      weaponSpecializationRemoveSuccess: () => {},
     },
   });
 

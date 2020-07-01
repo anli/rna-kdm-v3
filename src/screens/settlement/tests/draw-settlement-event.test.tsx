@@ -7,9 +7,9 @@ import React from 'react';
 import 'react-native';
 import {fireEvent, RenderAPI} from 'react-native-testing-library';
 import * as redux from 'react-redux';
-import SettlementScreen from './settlement';
+import SettlementScreen from '../settlement';
 
-const feature = loadFeature('./e2e/remove-location.feature');
+const feature = loadFeature('./e2e/draw-settlement-event.feature');
 
 defineFeature(feature, test => {
   let component: RenderAPI;
@@ -22,9 +22,9 @@ defineFeature(feature, test => {
     mockDispatch.mockReset();
   });
 
-  test('remove location', ({given, when, then}) => {
+  test('draw settlement event', ({given, when, then}) => {
     given('I am any', async () => {});
-    given('data of "Locations" is "Blacksmith"', async () => {
+    when('I am at "Settlement Screen"', async () => {
       store = configureStore({
         reducer: {
           settlement: getSettlementSlice({
@@ -34,26 +34,16 @@ defineFeature(feature, test => {
               conviction: undefined,
               society: undefined,
             },
-            locations: ['blacksmith'],
           }).reducer,
         },
       });
-    });
-    given('I am at "Settlement Screen"', async () => {
       component = render(<SettlementScreen.Component />, store);
     });
-    when('I press "Blacksmith"', async () => {
-      fireEvent.press(component.getByTestId('LocationRemoveButton'));
-      fireEvent.press(component.getByText('Blacksmith'));
+    when('I press "Draw Settlement Event Button"', async () => {
+      fireEvent.press(component.getByTestId('SettlementEventDrawButton'));
     });
-    when('I press "Location Remove Button"', async () => {
-      fireEvent.press(component.getByTestId('LocationRemoveButton'));
-    });
-    then('I should see "No Blacksmith"', async () => {
-      expect(mockDispatch).toHaveBeenLastCalledWith({
-        payload: 'blacksmith',
-        type: 'settlement/locationRemove',
-      });
+    then('I should see "Settlement Event"', async () => {
+      expect(component.getByTestId('SettlementEvent')).toBeDefined();
     });
   });
 });
